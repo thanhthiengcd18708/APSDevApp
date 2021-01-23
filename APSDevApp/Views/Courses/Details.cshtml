@@ -1,0 +1,17 @@
+﻿@model APSDevApp.Models.Course
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Course Details</h2>
+
+@Html.ActionLink("Back to My Tasks", "Index", "Courses",
+    null,
+    new { @class = "btn btn-primary" })
+
+<ul>
+    <li>@Model.Id</li>
+    <li>@Model.Name</li>
+    <li>@Model.Dc</li>
+
+</ul>
