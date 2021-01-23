@@ -2,30 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace APSDevApp.Controllers
 {
-    public class CoursesController : Controller
+    public class CategoriesController : Controller
     {
         // GET: Courses
         private ApplicationDbContext _context;
-        public CoursesController()
+        public CategoriesController()
         {
             _context = new ApplicationDbContext();
         }
         // GET: Tasks
         public ActionResult Index()
         {
-            return View(_context.Courses.ToList());
+            return View(_context.Categories.ToList());
         }
 
         public ActionResult Details(int id)
         {
-            var  courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
-            return View(courseInDb);
+            var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == id);
+            return View(categoryInDb);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace APSDevApp.Models
 				: base("DefaultConnection", throwIfV1Schema: false)
 		{
 		}
-
+		public DbSet<Category>  Categories  { get; set; }
 		public DbSet<Course> Courses { get; set; }
 
 		public static ApplicationDbContext Create()
