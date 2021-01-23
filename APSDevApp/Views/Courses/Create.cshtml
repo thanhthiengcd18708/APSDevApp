@@ -1,4 +1,4 @@
-﻿@model  APSDevApp.Models.Course
+﻿@model  APSDevApp.Models.CourseCategoriesViewModel
 @{
     ViewBag.Title = "Create";
 }
@@ -7,14 +7,16 @@
 
 @using (Html.BeginForm("Create", "Courses", "POST"))
 {
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name)
-        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-        @Html.LabelFor(model => model.Dc)
-        @Html.TextAreaFor(model => model.Name, new { @class = "form-control" })
- 
-        <button type="submit" class="btn btn-primary">Create a Task</button>
+<div class="form-group">
+    @Html.LabelFor(model => model.Course.Name)
+    @Html.TextBoxFor(model => model.Course.Name, new { @class = "form-control" })
+    @Html.LabelFor(model => model.Course.Dc)
+    @Html.TextAreaFor(model => model.Course.Dc, new { @class = "form-control" })
+    @Html.LabelFor(model => model.Course.Category.Name)
+    @Html.DropDownListFor(model => model.Course.CategoryId,
+    new SelectList(Model.Categories, "Id", "Name"),
+    new { @class = "form-control" })
 
-
-    </div>
+    <button type="submit" class="btn btn-primary">Create a Task</button>
+</div>
 }

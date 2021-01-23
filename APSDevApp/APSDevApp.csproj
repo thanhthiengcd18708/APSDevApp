@@ -185,12 +185,21 @@
     <Compile Include="Migrations\202101231246122_CreateCategoryTable.Designer.cs">
       <DependentUpon>202101231246122_CreateCategoryTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101231522039_CreateCourseCategoriesViewModel.cs" />
+    <Compile Include="Migrations\202101231522039_CreateCourseCategoriesViewModel.Designer.cs">
+      <DependentUpon>202101231522039_CreateCourseCategoriesViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101231533103_CreateViewModels.cs" />
+    <Compile Include="Migrations\202101231533103_CreateViewModels.Designer.cs">
+      <DependentUpon>202101231533103_CreateViewModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseCategoriesViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -279,6 +288,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101231246122_CreateCategoryTable.resx">
       <DependentUpon>202101231246122_CreateCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101231522039_CreateCourseCategoriesViewModel.resx">
+      <DependentUpon>202101231522039_CreateCourseCategoriesViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101231533103_CreateViewModels.resx">
+      <DependentUpon>202101231533103_CreateViewModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

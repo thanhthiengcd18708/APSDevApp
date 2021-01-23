@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
+using System.Data.Entity;
 namespace APSDevApp.Controllers
 {
     public class CoursesController : Controller
@@ -19,12 +20,18 @@ namespace APSDevApp.Controllers
         // GET: Tasks
         public ActionResult Index()
         {
-            return View(_context.Courses.ToList());
+            var courses = _context.Courses.Include(m => m.Category)
+                .ToList();
+            return View(courses);
         }
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var Models = new CourseCategoriesViewModel()
+            {
+                Categories = _context.Categories.ToList()
+            };
+            return View(Models);
         }
         [HttpPost]
         public ActionResult Create(Course course)
@@ -32,9 +39,10 @@ namespace APSDevApp.Controllers
             if (!ModelState.IsValid) return View();
             var newCourse = new Course()
             {
+                CategoryId = course.CategoryId,
                 Name = course.Name,
-                Dc = course.Dc,
-                
+                Dc = course.Dc
+
             };
 
             _context.Courses.Add(newCourse);

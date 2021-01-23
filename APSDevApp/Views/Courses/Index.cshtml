@@ -6,7 +6,7 @@
 <h2>Index Course</h2>
 
 @Html.ActionLink("Create new Course", "Create", "Courses",
-	null, 
+	null,
 	new { @class = "btn btn-primary" })
 
 <form>
@@ -20,6 +20,7 @@
         <tr>
             <th>Course #</th>
             <th>Course Name</th>
+            <th>Name</th>
             <th>Action</th>
 
         </tr>
@@ -27,15 +28,16 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>
-                    @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    <a href="" class="btn btn-default">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Category.Name</td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Update", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "Delete", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
         }
     </tbody>
-</table> 
+</table>
