@@ -5,7 +5,9 @@
 
 <h2>Index Course</h2>
 
-<a href="" class="btn btn-primary">Create a Course</a>
+@Html.ActionLink("Create new Course", "Create", "Courses",
+	null, 
+	new { @class = "btn btn-primary" })
 
 <form>
     <label for="fname">Search by Course Name:</label><br>

@@ -3,9 +3,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index Course</h2>
+<h2>Index Category</h2>
 
-<a href="" class="btn btn-primary">Create a Caterogy</a>
+@Html.ActionLink("Create new Category", "Create", "Categories",
+	null, 
+	new { @class = "btn btn-primary" })
 
 <form>
     <label for="fname">Search by Category Name:</label><br>
@@ -18,6 +20,7 @@
         <tr>
             <th>Category #</th>
             <th>Category Name</th>
+            <th>CategoryDc</th>
             <th>Action</th>
 
         </tr>
@@ -25,15 +28,16 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>
-                    @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    <a href="" class="btn btn-default">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Dc</td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Categories", new { id = item.Id }, new { @class = "btn btn-primary" })
+                <a href="" class="btn btn-default">Edit</a>
+                <a href="" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table> 

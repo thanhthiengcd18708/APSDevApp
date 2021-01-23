@@ -14,8 +14,10 @@ namespace APSDevApp.Models
 
         [Required(ErrorMessage = "Name should not be Empty !!!")]
         [StringLength(255)]
-        [DisplayName("Task Name")]
+        [DisplayName("Category Name")]
         public string Name { get; set; }
+        [DisplayName("Category DC")]
         public string Dc { get; set; }
+
     }
 }

@@ -21,11 +21,33 @@ namespace APSDevApp.Controllers
         {
             return View(_context.Courses.ToList());
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Course course)
+        {
+            if (!ModelState.IsValid) return View();
+            var newCourse = new Course()
+            {
+                Name = course.Name,
+                Dc = course.Dc,
+                
+            };
+
+            _context.Courses.Add(newCourse);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
 
         public ActionResult Details(int id)
         {
-            var  courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
+            var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
             return View(courseInDb);
         }
+
     }
 }
