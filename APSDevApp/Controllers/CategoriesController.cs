@@ -47,5 +47,31 @@ namespace APSDevApp.Controllers
             var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == id);
             return View(categoryInDb);
         }
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == id);
+                if (categoryInDb == null) return HttpNotFound();
+            return View(categoryInDb);
+        }
+        [HttpPost]
+        public ActionResult Update(Category category)
+        {
+           
+            var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == category.Id);
+            categoryInDb.Name = category.Name;
+            categoryInDb.Dc = category.Dc;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int id)
+        {
+            var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == id);
+            if (categoryInDb == null) return HttpNotFound();
+            _context.Categories.Remove(categoryInDb);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
     }
 }

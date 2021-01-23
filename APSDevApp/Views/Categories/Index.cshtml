@@ -34,8 +34,8 @@
             <td>@item.Dc</td>
             <td>
                 @Html.ActionLink("Details", "Details", "Categories", new { id = item.Id }, new { @class = "btn btn-primary" })
-                <a href="" class="btn btn-default">Edit</a>
-                <a href="" class="btn btn-danger">Delete</a>
+                @Html.ActionLink("Update", "Update", "Categories", new { id = item.Id }, new { @class = "btn btn-dark" })
+                @Html.ActionLink("Delete", "Delete", "Categories", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
         }
