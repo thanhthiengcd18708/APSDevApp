@@ -1,0 +1,39 @@
+﻿@model IEnumerable<APSDevApp.Models.Course>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index Course</h2>
+
+<a href="" class="btn btn-primary">Create a Course</a>
+
+<form>
+    <label for="fname">Search by Course Name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Course #</th>
+            <th>Course Name</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>
+                    @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    <a href="" class="btn btn-default">Edit</a>
+                    <a href="" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 
