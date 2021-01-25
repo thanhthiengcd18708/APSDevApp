@@ -1,8 +1,6 @@
 ﻿using APSDevApp.Models;
-using System;
-using System.Collections.Generic;
+using Microsoft.Ajax.Utilities;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace APSDevApp.Controllers
@@ -16,9 +14,16 @@ namespace APSDevApp.Controllers
             _context = new ApplicationDbContext();
         }
         // GET: Tasks
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(_context.Categories.ToList());
+            var categories = _context.Categories.ToList();
+            if (!searchString.IsNullOrWhiteSpace())
+            {
+                categories = _context.Categories
+                    .Where(c => c.Name.Contains(searchString))
+                    .ToList();
+            }
+            return View(categories);
         }
         [HttpGet]
         public ActionResult Create()
@@ -33,7 +38,6 @@ namespace APSDevApp.Controllers
             {
                 Name = category.Name,
                 Dc = category.Dc,
-
             };
 
             _context.Categories.Add(newCategory);
@@ -51,13 +55,13 @@ namespace APSDevApp.Controllers
         public ActionResult Update(int id)
         {
             var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == id);
-                if (categoryInDb == null) return HttpNotFound();
+            if (categoryInDb == null) return HttpNotFound();
             return View(categoryInDb);
         }
         [HttpPost]
         public ActionResult Update(Category category)
         {
-           
+
             var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == category.Id);
             categoryInDb.Name = category.Name;
             categoryInDb.Dc = category.Dc;

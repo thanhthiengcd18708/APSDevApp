@@ -1,11 +1,11 @@
-﻿@model APSDevApp.Models.Category
+﻿@model APSDevApp.Models.Course
 @{
     ViewBag.Title = "Update";
 }
 
-<h2>Update this Category</h2>
+<h2>Update this Course</h2>
 
-@using (Html.BeginForm("Update", "Categories", "POST"))
+@using (Html.BeginForm("Update", "Courses", "POST"))
 {
     <div class="form-group">
         @Html.HiddenFor(model => model.Id)

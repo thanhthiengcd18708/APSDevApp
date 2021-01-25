@@ -16,6 +16,7 @@ namespace APSDevApp.Models
         [StringLength(255)]
         [DisplayName("Category Name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Description should not be Empty !!!")]
         [DisplayName("Category DC")]
         public string Dc { get; set; }
 

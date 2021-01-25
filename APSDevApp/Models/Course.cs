@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace APSDevApp.Models
 {
@@ -16,9 +12,11 @@ namespace APSDevApp.Models
         [StringLength(255)]
         [DisplayName("Course Name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Description should not be Empty !!!")]
+        public string Dc { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public string Dc { get; set; }
+
 
     }
 }

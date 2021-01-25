@@ -6,21 +6,26 @@
 <h2>Index Course</h2>
 
 @Html.ActionLink("Create new Course", "Create", "Courses",
-	null,
-	new { @class = "btn btn-primary" })
+    null,
+    new { @class = "btn btn-primary" })
 
-<form>
-    <label for="fname">Search by Course Name:</label><br>
-    <input type="text" id="fname" name="fname"><br>
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+@using (Html.BeginForm("Index", "Courses", "POST"))
+{
+    <div class="form-group">
+        <label for="fname">Search by Course Name:</label><br>
+        @Html.TextBox("searchString", null, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}
 
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>Course #</th>
             <th>Course Name</th>
-            <th>Name</th>
+            <th>CourseDc</th>
             <th>Action</th>
 
         </tr>
@@ -28,16 +33,16 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td>@item.Category.Name</td>
-            <td>
-                @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Update", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Delete", "Delete", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Dc</td>
+                <td>
+                    @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Update", "Update", "Courses", new { id = item.Id }, new { @class = "btn btn-dark" })
+                    @Html.ActionLink("Delete", "Delete", "Courses", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
