@@ -37,7 +37,7 @@ namespace APSDevApp.Controllers
             var newCategory = new Category()
             {
                 Name = category.Name,
-                Dc = category.Dc,
+                Description = category.Description,
             };
 
             _context.Categories.Add(newCategory);
@@ -64,7 +64,7 @@ namespace APSDevApp.Controllers
 
             var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == category.Id);
             categoryInDb.Name = category.Name;
-            categoryInDb.Dc = category.Dc;
+            categoryInDb.Description = category.Description;
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -41,7 +41,7 @@ namespace APSDevApp.Controllers
             {
                 CategoryId = course.CategoryId,
                 Name = course.Name,
-                Dc = course.Dc
+                Description = course.Description
 
             };
             _context.Courses.Add(newCourse);
@@ -65,7 +65,7 @@ namespace APSDevApp.Controllers
 
             var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == course.Id);
             courseInDb.Name = course.Name;
-            courseInDb.Dc = course.Dc;
+            courseInDb.Description = course.Description;
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

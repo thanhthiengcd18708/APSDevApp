@@ -25,7 +25,7 @@
         <tr>
             <th>Category #</th>
             <th>Category Name</th>
-            <th>CategoryDc</th>
+            <th>Category Description</th>
             <th>Action</th>
 
         </tr>
@@ -36,7 +36,7 @@
             <tr>
                 <td>@item.Id</td>
                 <td>@item.Name</td>
-                <td>@item.Dc</td>
+                <td>@item.Description</td>
                 <td>
                     @Html.ActionLink("Details", "Details", "Categories", new { id = item.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Update", "Update", "Categories", new { id = item.Id }, new { @class = "btn btn-dark" })

@@ -13,7 +13,7 @@ namespace APSDevApp.Models
         [DisplayName("Course Name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Description should not be Empty !!!")]
-        public string Dc { get; set; }
+        public string Description { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
