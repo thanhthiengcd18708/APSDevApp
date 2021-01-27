@@ -9,6 +9,6 @@ namespace APSDevApp.ViewModel
     public class ChangeAssignTrainee
     {
         public IEnumerable<Course> Courses { get; set; }
-        public Trainee Trainee{ get; set; }
+        public Trainee Trainee { get; set; }
     }
 }

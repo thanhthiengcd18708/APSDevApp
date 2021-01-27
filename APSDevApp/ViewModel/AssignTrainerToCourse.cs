@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using APSDevApp.Models;
 
- namespace APSDevApp.ViewModel
+namespace APSDevApp.ViewModel
 {
     public class AssignTrainerToCourse
     {

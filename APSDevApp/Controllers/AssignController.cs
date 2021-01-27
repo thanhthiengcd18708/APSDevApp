@@ -11,6 +11,10 @@ namespace APSDevApp.Controllers
     public class AssignController : Controller
     {
         private ApplicationDbContext _context;
+        public AssignController()
+        {
+            _context = new ApplicationDbContext();
+        }
         public ActionResult Index(int id)
         {
             var trainerInCourse = _context.Trainers.Where(c => c.CourseId == id).ToList();
@@ -132,6 +136,5 @@ namespace APSDevApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Assign");
         }
-
     }
 }

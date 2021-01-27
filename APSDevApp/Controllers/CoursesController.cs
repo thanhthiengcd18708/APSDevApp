@@ -17,7 +17,9 @@ namespace APSDevApp.Controllers
         // GET: Tasks
         public ActionResult Index(string searchString)
         {
-            var courses = _context.Courses.Include(c => c.Category).ToList();
+            var courses = _context.Courses
+                .Include(c => c.Category)
+                .ToList();
 
             if (!searchString.IsNullOrWhiteSpace())
             {

@@ -218,6 +218,10 @@
     <Compile Include="Migrations\202101261359176_UpdateModelhih.Designer.cs">
       <DependentUpon>202101261359176_UpdateModelhih.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101270723306_hahaha.cs" />
+    <Compile Include="Migrations\202101270723306_hahaha.Designer.cs">
+      <DependentUpon>202101270723306_hahaha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -350,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101261359176_UpdateModelhih.resx">
       <DependentUpon>202101261359176_UpdateModelhih.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101270723306_hahaha.resx">
+      <DependentUpon>202101270723306_hahaha.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
