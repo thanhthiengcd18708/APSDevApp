@@ -1,0 +1,20 @@
+﻿@model APSDevApp.Models.Category
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update this Category</h2>
+
+@using (Html.BeginForm("Update", "Categories", "POST"))
+{
+    <div class="form-group">
+        @Html.HiddenFor(model => model.Id)
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        <button type="submit" class="btn btn-primary">Update this Category</button>
+
+
+    </div>
+}

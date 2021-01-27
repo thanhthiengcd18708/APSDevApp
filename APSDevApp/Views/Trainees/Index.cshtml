@@ -1,0 +1,46 @@
+﻿@model IEnumerable<APSDevApp.Models.Trainee>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index Trainee</h2>
+@Html.ActionLink("Create new Trainee", "Create", "Trainees",
+    null,
+    new { @class = "btn btn-primary" })
+
+@using (Html.BeginForm("Index", "Trainees", "POST"))
+{
+    <div class="form-group">
+        <label for="fname">Search by Trainee Name:</label><br>
+        @Html.TextBox("searchString", null, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>TraineeId</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>DayOfBirthday</th>
+            <th>ProgramingLanguage</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ApplicationUser.TraineeUser</td>
+                <td>@item.ApplicationUser.TraineeUser</td>
+                <td>@item.Age</td>
+                <td>@item.DayOfBirthday</td>
+                <td>@item.ProgramingLanguage</td>
+
+            </tr>
+        }
+    </tbody>
+</table> 
