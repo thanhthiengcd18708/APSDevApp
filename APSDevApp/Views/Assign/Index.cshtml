@@ -1,0 +1,51 @@
+﻿@model  APSDevApp.ViewModel.TrainerandTraineeCourseList
+@{  
+    ViewBag.Title = "Index";
+}
+
+@*<h2>@Model.Course.Name</h2>*@
+<h2>Index Course</h2>
+@Html.ActionLink("Add Trainer Assign", "AddTrainerAssign", "Assign",
+                                          new { id = Model.Course.Id},
+                                          new { @class = "btn btn-danger" })
+
+<table>
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>FullName</th>
+            <th>PhoneNumber</th>
+            <th>WorkingPlace</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model.Trainers)
+        {
+         <tr>
+            <td>@item.ApplicationUser.UserName</td>
+            <td>@item.ApplicationUser.FullName</td>
+            <td>@item.PhoneNumber</td>
+            <td>@item.WorkingPlace</td>
+            <td>@item.Type</td>
+             <td>
+             @using (Html.BeginForm("DeleteTrainerAssign", "Assign", "POST"))
+                     {
+                         <div>
+                           <input  value="@Model.Course.Id">
+                           <input  value="@item.TrainerId">
+                         </div>
+                         <div >
+                         <button >Delete Trainer Assign</button>
+                         </div>
+             }
+             @Html.ActionLink("Change Trainer Assign", "ChangeTrainerAssign", "Assign",
+                              new{ CourseId = Model.Course.Id,
+                                   TrainerId = item.TrainerId},
+                              new { @class = "btn btn-warning" })
+             </td>
+          </tr>
+        }
+    </tbody>
+</table>

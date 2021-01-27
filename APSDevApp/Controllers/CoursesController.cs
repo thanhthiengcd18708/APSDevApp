@@ -1,5 +1,7 @@
 ﻿using APSDevApp.Models;
+using APSDevApp.ViewModel;
 using Microsoft.Ajax.Utilities;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 namespace APSDevApp.Controllers
@@ -15,7 +17,8 @@ namespace APSDevApp.Controllers
         // GET: Tasks
         public ActionResult Index(string searchString)
         {
-            var courses = _context.Courses.ToList();
+            var courses = _context.Courses.Include(c => c.Category).ToList();
+
             if (!searchString.IsNullOrWhiteSpace())
             {
                 courses = _context.Courses
@@ -50,22 +53,38 @@ namespace APSDevApp.Controllers
         }
         public ActionResult Details(int id)
         {
+
             var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
+            var courses = _context.Courses.Include(c => c.Category).ToList();
             return View(courseInDb);
         }
         public ActionResult Update(int id)
         {
-            var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
-            if (courseInDb == null) return HttpNotFound();
-            return View(courseInDb);
+            var taskInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
+            if (taskInDb == null) return HttpNotFound();
+            var viewModel = new CourseCategoriesViewModel()
+            {
+                Course = taskInDb,
+                Categories = _context.Categories.ToList()
+            };
+            return View(viewModel);
         }
         [HttpPost]
         public ActionResult Update(Course course)
         {
-
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CourseCategoriesViewModel()
+                {
+                    Course = course,
+                    Categories = _context.Categories.ToList()
+                };
+                return View(viewModel);
+            }
             var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == course.Id);
             courseInDb.Name = course.Name;
             courseInDb.Description = course.Description;
+            courseInDb.CategoryId = course.CategoryId;
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

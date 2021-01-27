@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using APSDevApp.Models;
 
-namespace APSDevApp.Models
+namespace APSDevApp.ViewModel
 {
-    public class CourseCategoriesViewModel
+    public class AssignTraineeToCourse
     {
         public Course Course { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
+        public Trainee Tranees { get; set; }
+
+
     }
 }

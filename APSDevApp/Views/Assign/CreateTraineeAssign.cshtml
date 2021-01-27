@@ -1,0 +1,53 @@
+﻿@model APSDevApp.ViewModel.TrainerandTraineeCourseList
+@{
+    ViewBag.Title = "CreateTrainerAssign";
+}
+
+<h2>Trainer Not In Course</h2>
+<div>
+    <p>List Trainer Not In Course</p>
+</div>
+
+<table>
+    <thread>
+        <tr>
+            <th>UserName</th>
+            <th>ProgramingLanguage</th>
+            <th>DayofBirth</th>
+            <th>Education</th>
+            <th>Location</th>
+            <th>ToeicScore</th>
+            <th>Action</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var item in Model.Trainees)
+        {
+        <tr>
+            <td>@item.ApplicationUser.UserName</td>
+            <td>@item.PrograrmingLanguage</td>
+            <td>@item.DayOfBirth</td>
+            <td>@item.Education</td>
+            <td>@item.Location</td>
+            <td>@item.ToeicScore</td>
+            <td>
+                @using (Html.BeginForm("Assign trainee to a course.", "Assign", "POST"))
+                {
+                    <div>
+                        <input type="hidden" name="CourseId" value="@Model.Course.Id">
+                        <input type="hidden" name="TrainerId" value="@item.TraineeId">
+                    </div>
+                    <div>
+                        <button>Add</button>
+                    </div>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+            

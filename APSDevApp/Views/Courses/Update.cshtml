@@ -1,6 +1,5 @@
-﻿@model APSDevApp.Models.Course
-@{
-    ViewBag.Title = "Update";
+﻿@model APSDevApp.ViewModel.CourseCategoriesViewModel 
+@{ViewBag.Title = "Update";
 }
 
 <h2>Update this Course</h2>
@@ -8,13 +7,23 @@
 @using (Html.BeginForm("Update", "Courses", "POST"))
 {
     <div class="form-group">
-        @Html.HiddenFor(model => model.Id)
-        @Html.LabelFor(model => model.Name)
-        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-        @Html.LabelFor(model => model.Description)
-        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-        <button type="submit" class="btn btn-primary">Update this Category</button>
+        @Html.HiddenFor(model => model.Course.Id)
+        @Html.LabelFor(model => model.Course.Name)
+        @Html.TextBoxFor(model => model.Course.Name, new { @class = "form-control", style = "width:350px" })
+    </div>
+    <div class="form-group">
 
+        @Html.LabelFor(model => model.Course.Description)
+        @Html.TextAreaFor(model => model.Course.Description, new { @class = "form-control", style = "width:350px" })
+    </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.Course.Category.Name)
+        @Html.DropDownListFor(model => model.Course.CategoryId,
+         new SelectList(Model.Categories, "Id", "Name"),
+         new { @class = "form-control", style = "width:350px" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Edit this Task</button>
     </div>
 }

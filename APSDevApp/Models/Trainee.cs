@@ -13,11 +13,13 @@ namespace APSDevApp.Models
         [Key]
         public string TraineeId { get; set; }
         public string Name { get; set; }
-        public string Class { get; set; }
-        public string Birthday { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        public int CourseId { get; set; }
+        public string Age { get; set; }
+        public string DayOfBirth { get; set; }
+        public string Education { get; set; }
+        public string PrograrmingLanguage { get; set; }
+        public int ToeicScore { get; set; }
+        public string Location { get; set; }
+        public int? CourseId { get; set; }
         public Course Course { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
