@@ -67,7 +67,7 @@ namespace APSDevApp.Controllers
             var trainer = _context.Trainers.SingleOrDefault(t => t.TrainerId == TrainerId);
             trainer.CourseId = courseId;
             _context.SaveChanges();
-            return RedirectToAction("Index/"+  CourseId  );
+            return RedirectToAction("Index/" + CourseId);
         }
         [HttpPost]
         public ActionResult DeleteTrainerAssign(string CourseId, string TrainerId)
@@ -102,8 +102,7 @@ namespace APSDevApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index/" + CourseId);
         }
-        return RedirectToAction("Index/" + CourseId);
-        }
+        
         [HttpGet]
         public ActionResult ChangeTraineeAssign(int CourseId, string TraineeId)
         {
