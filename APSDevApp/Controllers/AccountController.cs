@@ -51,8 +51,6 @@ namespace APSDevApp.Controllers
                 _userManager = value;
             }
         }
-
-        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -61,8 +59,7 @@ namespace APSDevApp.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
+        ///Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -494,3 +491,4 @@ namespace APSDevApp.Controllers
 }
 
 //account staff staff@mail.com @Thien123
+//staff 

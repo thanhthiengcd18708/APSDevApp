@@ -8,7 +8,7 @@
     <p>List Trainer Not In Course</p>
 </div>
 
-<table>
+<table class="table table-bordered">
     <thread>
         <tr>
             <th>UserName</th>
@@ -29,16 +29,17 @@
                 <td>@item.WorkingPlace</td>
                 <td>@item.Type</td>
                 <td>
-                    @using (Html.BeginForm("Assign trainer to a course.", "Assign", "POST"))
+                    @using (Html.BeginForm("CreateTrainerAssign", "Assign", "POST"))
                     {
                         <div>
                             <input type="hidden" name="CourseId" value="@Model.Course.Id">
                             <input type="hidden" name="TrainerId" value="@item.TrainerId">
                         </div>
-                        <div>
-                            <button>Add</button>
-                        </div>
+                          <div>
+                <button type="submit">Add</button>
+            </div>
                     }
+
                 </td>
             </tr>
         }

@@ -5,7 +5,10 @@
 
 @*<h2>@Model.Course.Name</h2>*@
 <h2>Index Course</h2>
-@Html.ActionLink("Add Trainer Assign", "AddTrainerAssign", "Assign",
+@Html.ActionLink("Assign Trainer to Course", "CreateTrainerAssign", "Assign",
+                                          new { id = Model.Course.Id },
+                                          new { @class = "btn btn-danger" })
+@Html.ActionLink("Assign Trainee to Course", "CreateTraineeAssign", "Assign",
                                           new { id = Model.Course.Id },
                                           new { @class = "btn btn-danger" })
 
@@ -14,9 +17,7 @@
         <tr>
             <th>UserName</th>
             <th>FullName</th>
-            <th>PhoneNumber</th>
-            <th>WorkingPlace</th>
-            <th>Type</th>
+            <th>CourseName</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -26,16 +27,14 @@
             <tr>
                 <td>@item.ApplicationUser.UserName</td>
                 <td>@item.ApplicationUser.FullName</td>
-                <td>@item.PhoneNumber</td>
-                <td>@item.WorkingPlace</td>
-                <td>@item.Type</td>
+                <td>@item.Course.Name</td>
                 <td>
                     @using (Html.BeginForm("DeleteTrainerAssign", "Assign", "POST"))
                     {
-                        <div>
-                            <input value="@Model.Course.Id">
-                            <input value="@item.TrainerId">
-                        </div>
+                        @*<div>
+                                <input value="@Model.Course.Id">
+                                <input value="@item.TrainerId">
+                            </div>*@
                         <div>
                             <button>Delete Trainer Assign</button>
                         </div>
@@ -45,6 +44,35 @@
                                           {
                                               CourseId = Model.Course.Id,
                                           TrainerId = item.TrainerId
+                                          },
+                                     new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tbody class="text-center">
+        @foreach (var item in Model.Trainees)
+        {
+            <tr>
+                <td>@item.ApplicationUser.UserName</td>
+                <td>@item.ApplicationUser.FullName</td>
+                <td>@item.Course.Name</td>
+                <td>
+                    @using (Html.BeginForm("CreateTraineeAssign", "Assign", "POST"))
+                    {
+                        @*<div>
+                                <input value="@Model.Course.Id">
+                                <input value="@item.TrainerId">
+                            </div>*@
+                        <div>
+                            <button>Delete Trainee Assign</button>
+                        </div>
+                    }
+                    @Html.ActionLink("Change Trainee Assign", "ChangeTraineeAssign", "Assign",
+                                     new
+                                          {
+                                              CourseId = Model.Course.Id,
+                                          TraineeId = item.TraineeId
                                           },
                                      new { @class = "btn btn-warning" })
                 </td>

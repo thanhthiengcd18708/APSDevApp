@@ -1,14 +1,14 @@
 ﻿@model APSDevApp.ViewModels.TrainerandTraineeCourseList
 @{
-    ViewBag.Title = "CreateTrainerAssign";
+    ViewBag.Title = "CreateTraineeAssign";
 }
 
-<h2>Trainer Not In Course</h2>
+<h2>Trainee Not In Course</h2>
 <div>
-    <p>List Trainer Not In Course</p>
+    <p>List Trainee Not In Course</p>
 </div>
 
-<table>
+<table class="table table-bordered">
     <thread>
         <tr>
             <th>UserName</th>
@@ -31,14 +31,14 @@
                 <td>@item.Location</td>
                 <td>@item.ToeicScore</td>
                 <td>
-                    @using (Html.BeginForm("Assign trainee to a course.", "Assign", "POST"))
+                    @using (Html.BeginForm("CreateTraineeAssign", "Assign", "POST"))
                     {
-                        <div>
+                        @*<div>
                             <input type="hidden" name="CourseId" value="@Model.Course.Id">
                             <input type="hidden" name="TrainerId" value="@item.TraineeId">
-                        </div>
+                        </div>*@
                         <div>
-                            <button>Add</button>
+                            <button type="submit">Add</button>
                         </div>
                     }
                 </td>
