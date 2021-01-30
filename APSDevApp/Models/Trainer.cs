@@ -18,7 +18,7 @@ namespace APSDevApp.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int? CourseId { get; set; }
-        public Course Course { get; set; }
+        public Course course { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

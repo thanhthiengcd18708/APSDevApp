@@ -23,26 +23,26 @@
     <tbody>
         @foreach (var item in Model.Trainees)
         {
-            <tr>
-                <td>@item.ApplicationUser.UserName</td>
-                <td>@item.ProgramingLanguage</td>
-                <td>@item.DayOfBirthday</td>
-                <td>@item.Education</td>
-                <td>@item.Location</td>
-                <td>@item.ToeicScore</td>
-                <td>
-                    @using (Html.BeginForm("CreateTraineeAssign", "Assign", "POST"))
-                    {
-                        @*<div>
-                            <input type="hidden" name="CourseId" value="@Model.Course.Id">
-                            <input type="hidden" name="TrainerId" value="@item.TraineeId">
-                        </div>*@
-                        <div>
-                            <button type="submit">Add</button>
-                        </div>
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>@item.ApplicationUser.UserName</td>
+            <td>@item.ProgramingLanguage</td>
+            <td>@item.DayOfBirthday</td>
+            <td>@item.Education</td>
+            <td>@item.Location</td>
+            <td>@item.ToeicScore</td>
+            <td>
+                @using (Html.BeginForm("CreateTraineeAssign", "Assign", "POST"))
+                {
+                    <div>
+                        <input type="hidden" name="CourseId" value="@Model.Course.Id">
+                        <input type="hidden" name="TraineeId" value="@item.TraineeId">
+                    </div>
+                    <div>
+                        <button type="submit">Add</button>
+                    </div>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>

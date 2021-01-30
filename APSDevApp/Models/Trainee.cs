@@ -20,7 +20,7 @@ namespace APSDevApp.Models
         public int ToeicScore { get; set; }
         public string Location { get; set; }
         public int? CourseId { get; set; }
-        public Course Course { get; set; }
+        public Course course { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

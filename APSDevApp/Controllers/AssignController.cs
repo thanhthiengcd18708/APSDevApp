@@ -44,7 +44,7 @@ namespace APSDevApp.Controllers
             var trainer = _context.Trainers.SingleOrDefault(t => t.TrainerId == TrainerId);
             trainer.CourseId = courseId;
             _context.SaveChanges();
-            return RedirectToAction("Index/" + CourseId);
+            return RedirectToAction("Index/" , new { id= CourseId});
         }
         [HttpGet]
         public ActionResult ChangeTrainerAssign(int CourseId, string TrainerId)
@@ -67,7 +67,7 @@ namespace APSDevApp.Controllers
             var trainer = _context.Trainers.SingleOrDefault(t => t.TrainerId == TrainerId);
             trainer.CourseId = courseId;
             _context.SaveChanges();
-            return RedirectToAction("Index/" + CourseId);
+            return RedirectToAction("Index/", new { Id = CourseId });
         }
         [HttpPost]
         public ActionResult DeleteTrainerAssign(string CourseId, string TrainerId)
@@ -102,7 +102,7 @@ namespace APSDevApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index/" + CourseId);
         }
-        
+
         [HttpGet]
         public ActionResult ChangeTraineeAssign(int CourseId, string TraineeId)
         {
@@ -124,7 +124,7 @@ namespace APSDevApp.Controllers
             var trainee = _context.Trainees.SingleOrDefault(t => t.TraineeId == TrainerId);
             trainee.CourseId = courseId;
             _context.SaveChanges();
-            return RedirectToAction("Index", new { id = courseId });
+            return RedirectToAction("Index", new { id = CourseId });
         }
         [HttpPost]
         public ActionResult DeleteTraineeAssign(string CourseId, string TraineeId)
@@ -133,7 +133,7 @@ namespace APSDevApp.Controllers
             var trainee = _context.Trainees.SingleOrDefault(t => t.TraineeId == TraineeId);
             trainee.CourseId = null;
             _context.SaveChanges();
-            return RedirectToAction("Index", new { id = courseId });
+            return RedirectToAction("Index/" + CourseId);
         }
     }
 }

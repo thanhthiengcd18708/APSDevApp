@@ -92,6 +92,19 @@ namespace APSDevApp.Controllers
         {
             var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
             if (courseInDb == null) return HttpNotFound();
+            var trainer = _context.Trainers.Where(t => t.CourseId == id);
+            foreach (var item in trainer)
+            {
+                item.course = null;
+                item.CourseId = null;
+            }
+            var trainee = _context.Trainees.Where(t => t.CourseId == id);
+            foreach (var item in trainee)
+            {
+                item.course = null;
+                item.CourseId = null;
+
+            }
             _context.Courses.Remove(courseInDb);
             _context.SaveChanges();
             return RedirectToAction("Index");

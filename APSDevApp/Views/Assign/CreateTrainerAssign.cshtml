@@ -31,13 +31,13 @@
                 <td>
                     @using (Html.BeginForm("CreateTrainerAssign", "Assign", "POST"))
                     {
-                        @*<div>
-                            <input type="hidden" name="CourseId" value="@Model.Course.Id">
-                            <input type="hidden" name="TrainerId" value="@item.TrainerId">
-                        </div>*@
-                          <div>
-                <button type="submit">Add</button>
-            </div>
+                        <div>
+                                <input type="hidden" name="CourseId" value="@Model.Course.Id">
+                                <input type="hidden" name="TrainerId" value="@item.TrainerId">
+                            </div>
+                        <div>
+                            <button type="submit">Add</button>
+                        </div>
                     }
 
                 </td>
