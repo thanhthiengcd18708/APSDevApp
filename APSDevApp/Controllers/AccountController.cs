@@ -132,6 +132,7 @@ namespace APSDevApp.Controllers
         }
 
         //
+        //
         // GET: /Account/Register
         [Authorize(Roles = "admin,staff")]
         public ActionResult Register()
@@ -157,19 +158,35 @@ namespace APSDevApp.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(_context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
+                var newTrainer = new Trainer();
+                var newTrainee = new Trainee();
 
 
                 if (result.Succeeded)
                 {
                     userManager.AddToRole(user.Id, model.RoleName);
-
+                    if (model.RoleName == "trainer")
+                    {
+                        newTrainer.TrainerId = user.Id;
+                        _context.Trainers.Add(newTrainer);
+                        _context.SaveChanges();
+                        return RedirectToAction("Index", "Trainers");
+                    }
+                    else if (model.RoleName == "trainee")
+                    {
+                        newTrainee.TraineeId = user.Id;
+                        _context.Trainees.Add(newTrainee);
+                        _context.SaveChanges();
+                        return RedirectToAction("Index", "Trainees");
+                    }
+                    else return RedirectToAction("Index", "Home");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    /*return RedirectToAction("Index", "Home");*/
                 }
                 AddErrors(result);
             }
@@ -258,12 +275,13 @@ namespace APSDevApp.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("Index", "Home");
             }
+            await UserManager.RemovePasswordAsync(user.Id);
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("Index", "Home");
             }
             AddErrors(result);
             return View();
@@ -491,4 +509,4 @@ namespace APSDevApp.Controllers
 }
 
 //account staff staff@mail.com @Thien123
-//staff 
+//staff

@@ -22,7 +22,7 @@ namespace APSDevApp.Controllers
             if (!searchString.IsNullOrWhiteSpace())
             {
                 courses = _context.Courses
-                    .Where(c => c.Name.Contains(searchString))
+                    .Where(c => c.Name.Contains(searchString) || c.Description.Contains(searchString))
                     .ToList();
             }
             return View(courses);

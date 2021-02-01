@@ -12,7 +12,6 @@ namespace APSDevApp.Models
         [ForeignKey("ApplicationUser")]
         [Key]
         public string TraineeId { get; set; }
-        public string Name { get; set; }
         public string Age { get; set; }
         public string DayOfBirthday { get; set; }
         public string Education { get; set; }

@@ -23,10 +23,10 @@ namespace APSDevApp.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            /*CreateUser(context, "admin@mail.com", "123");
+          /*  CreateUser(context, "admin@mail.com", "123");
             AddUserToRole(context, "admin@mail.com", "admin");*/
         }
-        /*private void CreateUser(ApplicationDbContext context,
+        private void CreateUser(ApplicationDbContext context,
             string email, string password)
         {
             var userManager = new UserManager<ApplicationUser>(
@@ -63,7 +63,7 @@ namespace APSDevApp.Migrations
             {
                 throw new Exception(string.Join("; ", addAdminRoleResult.Errors));
             }
-        }*/
+        }
 
     }
 }
