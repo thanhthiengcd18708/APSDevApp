@@ -71,7 +71,17 @@ namespace APSDevApp.Controllers
         public ActionResult Delete(int id)
         {
             var categoryInDb = _context.Categories.SingleOrDefault(t => t.Id == id);
-            if (categoryInDb == null) return HttpNotFound();
+            if (categoryInDb == null)
+
+            {
+               return RedirectToAction("Index");
+            }
+            var course = _context.Courses.Where(t => t.CategoryId == id);
+
+            if (course.Count() > 0)
+            {
+                return RedirectToAction("Index");
+            }
             _context.Categories.Remove(categoryInDb);
             _context.SaveChanges();
             return RedirectToAction("Index");

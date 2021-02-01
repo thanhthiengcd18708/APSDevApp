@@ -3,21 +3,18 @@
     ViewBag.Title = "Index";
 }
 
-@*<h2>@Model.Course.Name</h2>*@
-<h2>Index Course</h2>
+<h2>@Model.Course.Name</h2>
+
 @Html.ActionLink("Assign Trainer to Course", "CreateTrainerAssign", "Assign",
                                           new { id = Model.Course.Id },
                                           new { @class = "btn btn-danger" })
-@Html.ActionLink("Assign Trainee to Course", "CreateTraineeAssign", "Assign",
-                                          new { id = Model.Course.Id },
-                                          new { @class = "btn btn-danger" })
+
 
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>UserName</th>
             <th>FullName</th>
-            <th>CourseName</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -27,7 +24,7 @@
             <tr>
                 <td>@item.ApplicationUser.UserName</td>
                 <td>@item.ApplicationUser.FullName</td>
-                <td>@item.course.Name</td>
+
                 <td>
                     @using (Html.BeginForm("DeleteTrainerAssign", "Assign", "POST"))
                     {
@@ -46,14 +43,24 @@
             </tr>
         }
     </tbody>
-    @* Trainee*@
+</table>
+@Html.ActionLink("Assign Trainee to Course", "CreateTraineeAssign", "Assign",
+                                          new { id = Model.Course.Id },
+                                          new { @class = "btn btn-danger" })
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>FullName</th>
+            <th>Action</th>
+        </tr>
+    </thead>
     <tbody class="text-center">
         @foreach (var item in Model.Trainees)
         {
             <tr>
                 <td>@item.ApplicationUser.UserName</td>
                 <td>@item.ApplicationUser.FullName</td>
-                <td>@item.course.Name</td>
                 <td>
                     @using (Html.BeginForm("DeleteTraineeAssign", "Assign", "POST"))
                     {
