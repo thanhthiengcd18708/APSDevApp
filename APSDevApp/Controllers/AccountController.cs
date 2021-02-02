@@ -7,7 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
+using System;
+using System.Globalization;
 namespace APSDevApp.Controllers
 {
     [Authorize]
@@ -255,15 +256,21 @@ namespace APSDevApp.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string id)
         {
-            return code == null ? View("Error") : View();
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+            if (user == null) return HttpNotFound();
+            var resetUser = new ResetPasswordViewModel()
+            {
+                User = user
+            };
+            return View(resetUser);
         }
 
         //
         // POST: /Account/ResetPassword
         [HttpPost]
-        [AllowAnonymous]
+       /* [AllowAnonymous]*/
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
@@ -271,14 +278,13 @@ namespace APSDevApp.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByNameAsync(model.User.UserName);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
                 return RedirectToAction("Index", "Home");
             }
             await UserManager.RemovePasswordAsync(user.Id);
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = await UserManager.AddPasswordAsync(user.Id, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");

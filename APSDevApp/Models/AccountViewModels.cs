@@ -84,7 +84,7 @@ namespace APSDevApp.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        /*[Required]*/
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -101,6 +101,7 @@ namespace APSDevApp.Models
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
+        public ApplicationUser User { get; set; }
     }
 
     public class ForgotPasswordViewModel
