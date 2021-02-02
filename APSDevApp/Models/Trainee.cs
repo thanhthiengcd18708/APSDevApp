@@ -22,7 +22,7 @@ namespace APSDevApp.Models
         [DisplayName("Programing Language")]
         public string ProgramingLanguage { get; set; }
         [DisplayName("ToeicScore")]
-        public int ToeicScore { get; set; }
+        public string ToeicScore { get; set; }
         [DisplayName("Experience")]
         public int Experience { get; set; }
         [DisplayName("Location")]

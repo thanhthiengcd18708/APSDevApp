@@ -14,8 +14,7 @@ namespace APSDevApp.Models
         [Key]
         
         public string TrainerId { get; set; }
-        [DisplayName("Education")]
-        public string Education { get; set; }
+      
        
         public TrainerType Type { get; set; }
         [DisplayName("Working Place")]

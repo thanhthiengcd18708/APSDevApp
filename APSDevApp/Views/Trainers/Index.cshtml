@@ -3,13 +3,14 @@
 
 }
 <h2 style="text-align: center">Trainers Index</h2>
+@Html.ActionLink("Create new Trainer","Register","Account", null , new { @class = "btn btn-danger", style = "margin :10px" }) 
 
 @using (Html.BeginForm("Index", "Trainers", "POST"))
 {
     <div >
         <label >Search by Trainer's  name:</label>
         @Html.TextBox("searchInput", null,
-           new { @class = "form-control", Style = "margin-left: 15px" })
+           new { @class = "form-control", Style = "margin: 10px" })
     </div>
     <div >
         <button type="submit" class="btn btn-primary">Search</button>
@@ -20,7 +21,6 @@
         <tr>
             <th>E-mail</th>
             <th>Full name</th>
-            <th>Education</th>
             <th>Phone number</th>
             <th>Type</th>
             <th>Working Place</th>
@@ -33,7 +33,6 @@
         <tr>
             <th>@item.ApplicationUser.UserName</th>
             <th>@item.ApplicationUser.FullName</th>
-            <td>@item.Education</td>
             <td>@item.PhoneNumber</td>
             <td>@item.Type</td>
             <td>@item.WorkingPlace</td>

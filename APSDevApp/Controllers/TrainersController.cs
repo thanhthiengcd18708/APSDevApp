@@ -22,14 +22,15 @@ namespace APSDevApp.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchInput)
         {
             var trainers = _context.Trainers.ToList();
 
-            if (!searchString.IsNullOrWhiteSpace())
+            if (!searchInput.IsNullOrWhiteSpace())
             {
                 trainers = _context.Trainers
-                     .Where(c => c.ApplicationUser.FullName.Contains(searchString))
+                     .Where(c => c.ApplicationUser.FullName.Contains(searchInput)
+                     || c.WorkingPlace.Contains(searchInput))
                      .ToList();
             }
             return View(trainers);
@@ -59,7 +60,6 @@ namespace APSDevApp.Controllers
             var trainerInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == trainer.TrainerId);
             {
                 trainerInDb.ApplicationUser.FullName = trainer.ApplicationUser.FullName;
-                trainerInDb.Education = trainer.Education;
                 trainerInDb.PhoneNumber = trainer.PhoneNumber;
                 trainerInDb.WorkingPlace = trainer.WorkingPlace;
                 trainerInDb.Type = trainer.Type;

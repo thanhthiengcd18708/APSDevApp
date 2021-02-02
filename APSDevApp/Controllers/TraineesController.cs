@@ -21,14 +21,15 @@ namespace APSDevApp.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchInput)
         {
             var trainees = _context.Trainees.ToList();
 
-            if (!searchString.IsNullOrWhiteSpace())
+            if (!searchInput.IsNullOrWhiteSpace())
             {
                 trainees = _context.Trainees
-                     .Where(c => c.ApplicationUser.FullName.Contains(searchString))
+                     .Where(c => c.ApplicationUser.FullName.Contains(searchInput) || 
+                     c.ProgramingLanguage.Contains(searchInput) || c.ToeicScore.Contains(searchInput))
                      .ToList();
             }
             return View(trainees);
