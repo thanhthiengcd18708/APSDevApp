@@ -1,28 +1,34 @@
-﻿@model APSDevApp.Models.Trainer
+﻿@model APSDevApp.Models.Trainee
 @{ ViewBag.Title = "Details";
 }
 
-<h2>Profile of this trainer</h2>
+<h2>Profile of this trainee</h2>
 
 <table class="table table-bordered">
     <thead>
         <tr style="background-color: cadetblue ; text-align:center; ">
             <th>E-mail</th>
             <th>Full name</th>
-            <th>Education Level</th>
-            <th>Phone number</th>
-            <th>Type</th>
-            <th>Working Location</th>
+            <th>Age</th>
+            <th>Day Of Birth</th>
+            <th>Education</th>
+            <th>ProgramingLanguage</th>
+            <th>ToeicScore</th>
+            <th>Experience</th>
+            <th>Location</th>
         </tr>
     </thead>
     <tbody>
         <tr style="color:black; text-align:center">
             <td>@Model.ApplicationUser.UserName</td>
             <td>@Model.ApplicationUser.FullName</td>
+            <td>@Model.Age</td>
+            <td>@Model.DayOfBirthday</td>
             <td>@Model.Education</td>
-            <td>@Model.PhoneNumber</td>
-            <td>@Model.Type</td>
-            <td>@Model.WorkingPlace</td>
+            <td>@Model.ProgramingLanguage</td>
+            <td>@Model.ToeicScore</td>
+            <td>@Model.Experience</td>
+            <td>@Model.Location</td>
 
 
         </tr>

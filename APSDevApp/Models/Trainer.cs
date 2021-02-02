@@ -16,8 +16,8 @@ namespace APSDevApp.Models
         public string TrainerId { get; set; }
         [DisplayName("Education")]
         public string Education { get; set; }
-       /* [DisplayName("Type")]*/
-        public string Type { get; set; }
+       
+        public TrainerType Type { get; set; }
         [DisplayName("Working Place")]
         public string WorkingPlace { get; set; }
         [DisplayName("Phone Number")]
@@ -29,5 +29,11 @@ namespace APSDevApp.Models
         public int? CourseId { get; set; }
         public Course course { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+    }
+    public enum TrainerType
+    {
+        None = 0,
+        Internal = 1,
+        External = 2
     }
 }

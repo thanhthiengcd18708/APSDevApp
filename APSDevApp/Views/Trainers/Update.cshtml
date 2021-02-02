@@ -29,9 +29,9 @@
         @Html.TextAreaFor(model => model.WorkingPlace, new { @class = "form-control", @*style = "width:350px"*@ })
     </div>
 
-    <<div >
+    <div >
         @Html.LabelFor(model => model.Type)
-        @Html.TextBoxFor(model => model.Type, new { @class = "form-control", @*style = "width:350px" *@})
+        @Html.EnumDropDownListFor(model => model.Type, new { @class = "form-control", @*style = "width:350px" *@})
     </div>
 
     <div >

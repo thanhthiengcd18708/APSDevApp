@@ -200,6 +200,18 @@
     <Compile Include="Migrations\202102011522420_thientable.Designer.cs">
       <DependentUpon>202102011522420_thientable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102020237084_TrainerUpadteTabelenum.cs" />
+    <Compile Include="Migrations\202102020237084_TrainerUpadteTabelenum.Designer.cs">
+      <DependentUpon>202102020237084_TrainerUpadteTabelenum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102020314184_TraineesUpadteTabelenum.cs" />
+    <Compile Include="Migrations\202102020314184_TraineesUpadteTabelenum.Designer.cs">
+      <DependentUpon>202102020314184_TraineesUpadteTabelenum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102020332077_tabletraineemews.cs" />
+    <Compile Include="Migrations\202102020332077_tabletraineemews.Designer.cs">
+      <DependentUpon>202102020332077_tabletraineemews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -291,6 +303,8 @@
     <Content Include="Views\Assign\CreateTraineeAssign.cshtml" />
     <Content Include="Views\Trainers\Details.cshtml" />
     <Content Include="Views\Trainers\Update.cshtml" />
+    <Content Include="Views\Trainees\Details.cshtml" />
+    <Content Include="Views\Trainees\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,6 +337,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102011522420_thientable.resx">
       <DependentUpon>202102011522420_thientable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102020237084_TrainerUpadteTabelenum.resx">
+      <DependentUpon>202102020237084_TrainerUpadteTabelenum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102020314184_TraineesUpadteTabelenum.resx">
+      <DependentUpon>202102020314184_TraineesUpadteTabelenum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102020332077_tabletraineemews.resx">
+      <DependentUpon>202102020332077_tabletraineemews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
