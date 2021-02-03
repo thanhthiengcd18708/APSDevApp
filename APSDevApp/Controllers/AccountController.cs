@@ -119,6 +119,35 @@ namespace APSDevApp.Controllers
             return HttpNotFound();
         }
 
+        //Update Trainer profile
+        [Authorize(Roles = "staff,trainer")]
+        [HttpGet]
+        public ActionResult UpdateTrainerProfile()
+        {
+            var userId = User.Identity.GetUserId();
+            ApplicationUser userInWeb = _context.Users.FirstOrDefault(x => x.Id == userId);
+            var trainerProFi = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
+
+            var trainerInFor = new UserProfile()
+            {
+                UserInWeb = userInWeb,
+                TrainerInWeb = trainerProFi
+            };
+            return View(trainerInFor);
+        }
+        [HttpPost]
+        public ActionResult UpdateTrainerProfile(Trainer trainer)
+        {
+            var trainerProInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == trainer.TrainerId);
+            trainerProInDb.PhoneNumber = trainer.PhoneNumber;
+            trainerProInDb.WorkingPlace = trainer.WorkingPlace;
+            trainerProInDb.Type = trainer.Type;
+            _context.SaveChanges();
+            return RedirectToAction("ViewProfile");
+        }
+
+
+
 
         // GET: /Account/Login
         [AllowAnonymous]

@@ -1,0 +1,43 @@
+﻿@model APSDevApp.ViewModels.UserProfile
+@{ ViewBag.Title = "UpdateTrainerProfile";
+}
+
+<h2>Update trainer's profile</h2>
+
+@using (Html.BeginForm("UpdateTrainerProFile", "Account", "POST"))
+{
+
+    @Html.HiddenFor(model => model.TrainerInWeb.TrainerId)
+
+    <div>
+        @Html.LabelFor(model => model.UserInWeb.FullName)
+        @Html.TextAreaFor(model => model.UserInWeb.FullName, new { @class = "form-control", style = "width:350px" })
+    </div>
+
+
+    <div>
+        @Html.LabelFor(model => model.TrainerInWeb.PhoneNumber)
+        @Html.TextBoxFor(model => model.TrainerInWeb.PhoneNumber, new
+        {
+            @class = "form-control",@*style = "width:350px"*@})
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.TrainerInWeb.WorkingPlace)
+        @Html.TextAreaFor(model => model.TrainerInWeb.WorkingPlace, new
+        {
+            @class = "form-control",@*style = "width:350px"*@})
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.TrainerInWeb.Type)
+        @Html.EnumDropDownListFor(model => model.TrainerInWeb.Type, new
+        {
+            @class = "form-control",@*style = "width:350px" *@})
+    </div>
+
+    <div>
+        <button type="submit">Confirm changes</button>
+    </div>
+}
+
