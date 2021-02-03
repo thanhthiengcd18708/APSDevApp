@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System;
 using System.Globalization;
 using APSDevApp.ViewModels;
+using System.Data.Entity;
 
 namespace APSDevApp.Controllers
 {
@@ -54,13 +55,14 @@ namespace APSDevApp.Controllers
                 _userManager = value;
             }
         }
-        public ActionResult Profile()
+        public ActionResult ViewProfile()
         {
             var userIdCurrent = User.Identity.GetUserId();
             var userInWeb = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
             if (User.IsInRole("trainer"))
             {
                 var trainerInWeb = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
+                /* var courseTrainer = _context.Courses.SingleOrDefault(c => c.Id == trainerInWeb.CourseId);*/
                 var trainerInfor = new UserProfile()
                 {
                     UserInWeb = userInWeb,
@@ -86,6 +88,38 @@ namespace APSDevApp.Controllers
             return View(userInfor);
 
         }
+        public ActionResult ViewCourse()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            var userInWeb = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
+            if (User.IsInRole("trainer"))
+            {
+                var trainerInWeb = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
+                var courseTrainer = _context.Courses.SingleOrDefault(c => c.Id == trainerInWeb.CourseId);
+                var courses = _context.Courses.Include(c => c.Category).ToList();
+                var trainerInfor = new UserProfile()
+                {
+                    UserInWeb = userInWeb,
+                    TrainerInWeb = trainerInWeb
+                };
+                return View(courseTrainer);
+            }
+            else if (User.IsInRole("trainee"))
+            {
+                var traineeInWeb = _context.Trainees.SingleOrDefault(t => t.TraineeId == userInWeb.Id);
+                var courseTrainee = _context.Courses.SingleOrDefault(c => c.Id == traineeInWeb.CourseId);
+                var courses = _context.Courses.Include(c => c.Category).ToList();
+                var traineeInfor = new UserProfile()
+                {
+                    UserInWeb = userInWeb,
+                    TraineeInWeb = traineeInWeb
+                };
+                return View(courseTrainee);
+            }
+            return HttpNotFound();
+        }
+
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -310,7 +344,7 @@ namespace APSDevApp.Controllers
         //
         // POST: /Account/ResetPassword
         [HttpPost]
-       /* [AllowAnonymous]*/
+        /* [AllowAnonymous]*/
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
