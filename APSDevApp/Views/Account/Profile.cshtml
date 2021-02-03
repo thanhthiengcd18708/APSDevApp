@@ -1,0 +1,28 @@
+﻿@model APSDevApp.ViewModels.UserProfile
+@{
+    ViewBag.Title = "Profile";
+}
+
+@if (User.IsInRole("trainer"))
+{
+    <h2>@Model.TrainerInWeb.ApplicationUser.UserName </h2>
+    <li>Name: @Model.TrainerInWeb.ApplicationUser.FullName</li>
+    <li>Phone number: @Model.TrainerInWeb.PhoneNumber</li>
+    <li>Type: @Model.TrainerInWeb.Type</li>
+    <li>Working Place: @Model.TrainerInWeb.WorkingPlace</li>
+}
+@if (User.IsInRole("trainee"))
+{
+    <h2>@Model.TraineeInWeb.ApplicationUser.UserName</h2>
+    <li>Name: @Model.TraineeInWeb.ApplicationUser.FullName</li>
+    <li>Age: @Model.TraineeInWeb.Age</li>
+    <li>Location: @Model.TraineeInWeb.Location</li>
+    <li>Education: @Model.TraineeInWeb.Education</li>
+    <li>DayOfBirthday: @Model.TraineeInWeb.DayOfBirthday</li>
+    <li>ProgramingLanguage: @Model.TraineeInWeb.ProgramingLanguage</li>
+    <li>ToeicScore: @Model.TraineeInWeb.ToeicScore</li>
+}
+<h2>Profile User</h2>
+<li>@Model.UserInWeb.UserName</li>
+
+

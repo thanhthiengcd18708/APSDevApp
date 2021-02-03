@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace APSDevApp.ViewModels
 {
-    public class TrainerandTraineeCourseList
+    public class TrainerandTraineeCourseList // TraineesTrainersCourseViewModel
     {
         public Course Course { get; set; }
         public IEnumerable<Trainer> Trainers { get; set; }

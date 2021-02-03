@@ -6,7 +6,7 @@ using System.Web;
 
 namespace APSDevApp.ViewModels
 {
-    public class AssignTraineeToCourse
+    public class AssignTraineeToCourse // CourseTraineeViewModel
     {
         public Course Course { get; set; }
         public Trainee Trainees { get; set; }

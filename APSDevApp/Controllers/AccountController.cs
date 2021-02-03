@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using System;
 using System.Globalization;
+using APSDevApp.ViewModels;
+
 namespace APSDevApp.Controllers
 {
     [Authorize]
@@ -51,6 +53,38 @@ namespace APSDevApp.Controllers
             {
                 _userManager = value;
             }
+        }
+        public ActionResult Profile()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            var userInWeb = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
+            if (User.IsInRole("trainer"))
+            {
+                var trainerInWeb = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
+                var trainerInfor = new UserProfile()
+                {
+                    UserInWeb = userInWeb,
+                    TrainerInWeb = trainerInWeb
+                };
+                return View(trainerInfor);
+            }
+            if (User.IsInRole("trainee"))
+            {
+                var traineeInWeb = _context.Trainees.SingleOrDefault(t => t.TraineeId == userInWeb.Id);
+                var traineeInfor = new UserProfile()
+                {
+                    UserInWeb = userInWeb,
+                    TraineeInWeb = traineeInWeb
+                };
+                return View(traineeInfor);
+            }
+
+            var userInfor = new UserProfile()
+            {
+                UserInWeb = userInWeb
+            };
+            return View(userInfor);
+
         }
         // GET: /Account/Login
         [AllowAnonymous]
@@ -159,8 +193,8 @@ namespace APSDevApp.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(_context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-                var newTrainer = new Trainer();
-                var newTrainee = new Trainee();
+
+
 
 
                 if (result.Succeeded)
@@ -168,6 +202,7 @@ namespace APSDevApp.Controllers
                     userManager.AddToRole(user.Id, model.RoleName);
                     if (model.RoleName == "trainer")
                     {
+                        var newTrainer = new Trainer();
                         newTrainer.TrainerId = user.Id;
                         _context.Trainers.Add(newTrainer);
                         _context.SaveChanges();
@@ -175,10 +210,15 @@ namespace APSDevApp.Controllers
                     }
                     else if (model.RoleName == "trainee")
                     {
-                        newTrainee.TraineeId = user.Id;
-                        _context.Trainees.Add(newTrainee);
-                        _context.SaveChanges();
-                        return RedirectToAction("Index", "Trainees");
+                        if (User.IsInRole("staff"))
+                        {
+                            var newTrainee = new Trainee();
+                            newTrainee.TraineeId = user.Id;
+                            _context.Trainees.Add(newTrainee);
+                            _context.SaveChanges();
+                            return RedirectToAction("Index", "Trainees");
+                        }
+                        return RedirectToAction("Index", "Home");
                     }
                     else return RedirectToAction("Index", "Home");
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
