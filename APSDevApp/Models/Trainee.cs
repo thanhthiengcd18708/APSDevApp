@@ -28,7 +28,7 @@ namespace APSDevApp.Models
         [DisplayName("Location")]
         public string Location { get; set; }
         public int? CourseId { get; set; }
-        public Course course { get; set; }
+        public Course course { get; set;}
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

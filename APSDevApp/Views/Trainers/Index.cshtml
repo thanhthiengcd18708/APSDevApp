@@ -3,12 +3,12 @@
 
 }
 <h2 style="text-align: center">Trainers Index</h2>
-@Html.ActionLink("Create new Trainer","Register","Account", null , new { @class = "btn btn-danger", style = "margin :10px" }) 
 
+@Html.ActionLink("Create new Trainer","Register","Account", null , new { @class = "btn btn-danger", style = "margin :10px" }) 
 @using (Html.BeginForm("Index", "Trainers", "POST"))
 {
     <div >
-        <label >Search by Trainer's  name:</label>
+        <label >Search by Trainer's  :</label>
         @Html.TextBox("searchInput", null,
            new { @class = "form-control", Style = "margin: 10px" })
     </div>
@@ -37,16 +37,16 @@
             <td>@item.Type</td>
             <td>@item.WorkingPlace</td>
             <td>
-                @Html.ActionLink("Details trainer's profile", "Details", "Trainers",
+                @Html.ActionLink("Details profile", "Details", "Trainers",
                                                       new { id = item.TrainerId },
                                                       new { @class = "btn btn-primary", style = "margin :10px" })
                 @Html.ActionLink("Edit profile", "Update", "Trainers",
                                                       new { id = item.TrainerId },
-                                                      new { @class = "btn btn-primary", style = "margin :10px" })
-                @Html.ActionLink("Delete this trainer", "Delete", "Trainers",
-                                                      new { id = item.TrainerId },
                                                       new { @class = "btn btn-danger", style = "margin :10px" })
-                @Html.ActionLink("Reset & enter new password of trainer", "ResetPassword", "Account",
+                @Html.ActionLink("Delete trainer", "Delete", "Trainers",
+                                                      new { id = item.TrainerId },
+                                                      new { @class = "btn btn-primary", style = "margin :10px" })
+                @Html.ActionLink("Reset & enter new password ", "ResetPassword", "Account",
                                                       new { id = item.ApplicationUser.Id },
                                                       new { @class = "btn btn-danger", style = "margin :10px" })
             </td>
