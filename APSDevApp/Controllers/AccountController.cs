@@ -120,12 +120,12 @@ namespace APSDevApp.Controllers
         }
 
         //Update Trainer profile
-        [Authorize(Roles = "staff,trainer")]
+        [Authorize(Roles = "trainer")]
         [HttpGet]
         public ActionResult UpdateTrainerProfile()
         {
-            var userId = User.Identity.GetUserId();
-            ApplicationUser userInWeb = _context.Users.FirstOrDefault(x => x.Id == userId);
+            var userIdCurrent = User.Identity.GetUserId();
+            ApplicationUser userInWeb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
             var trainerProFi = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
 
             var trainerInFor = new UserProfile()
@@ -145,9 +145,43 @@ namespace APSDevApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("ViewProfile");
         }
-
-
-
+        //Get/Account/ResetPasswordUser
+        [Authorize(Roles = "trainer,trainee")]
+        public ActionResult ResetPasswordUser()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            ApplicationUser useInWeb = _context.Users.FirstOrDefault(c => c.Id == userIdCurrent);
+            var userPass = _context.Users.SingleOrDefault(m => m.Id == useInWeb.Id);
+            if (userPass == null) return HttpNotFound();
+            var resetPassUser = new ResetPasswordViewModel()
+            {
+                User = useInWeb
+            };
+            return View(resetPassUser);
+        }
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPasswordUser(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var userPass = await UserManager.FindByNameAsync(model.User.UserName);
+            if (userPass == null)
+            {
+                return RedirectToAction("ViewProfile", "Account");
+            }
+            await UserManager.RemovePasswordAsync(userPass.Id);
+            var result = await UserManager.AddPasswordAsync(userPass.Id, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ViewProfile", "Account");
+            }
+            AddErrors(result);
+            return View();
+        }
 
         // GET: /Account/Login
         [AllowAnonymous]
@@ -369,11 +403,8 @@ namespace APSDevApp.Controllers
             };
             return View(resetUser);
         }
-
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
-        /* [AllowAnonymous]*/
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
