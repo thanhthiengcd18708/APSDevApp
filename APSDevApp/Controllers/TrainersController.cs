@@ -40,7 +40,6 @@ namespace APSDevApp.Controllers
             var trainerInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == id);
             return View(trainerInDb);
         }
-
         public ActionResult Update(string id)
         {
             var trainerInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == id);

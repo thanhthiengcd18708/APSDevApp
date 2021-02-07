@@ -37,18 +37,34 @@
             <td>@item.Type</td>
             <td>@item.WorkingPlace</td>
             <td>
-                @Html.ActionLink("Details profile", "Details", "Trainers",
-                                                      new { id = item.TrainerId },
-                                                      new { @class = "btn btn-primary", style = "margin :10px" })
-                @Html.ActionLink("Edit profile", "Update", "Trainers",
-                                                      new { id = item.TrainerId },
-                                                      new { @class = "btn btn-danger", style = "margin :10px" })
-                @Html.ActionLink("Delete trainer", "Delete", "Trainers",
-                                                      new { id = item.TrainerId },
-                                                      new { @class = "btn btn-primary", style = "margin :10px" })
-                @Html.ActionLink("Reset & enter new password ", "ResetPassword", "Account",
-                                                      new { id = item.ApplicationUser.Id },
-                                                      new { @class = "btn btn-danger", style = "margin :10px" })
+                @if (User.IsInRole("staff"))
+                {
+                    @Html.ActionLink("Details profile", "Details", "Trainers",
+                                                               new { id = item.TrainerId },
+                                                               new { @class = "btn btn-primary", style = "margin :10px" })
+                    @Html.ActionLink("Edit profile", "Update", "Trainers",
+                                                                   new { id = item.TrainerId },
+                                                                   new { @class = "btn btn-danger", style = "margin :10px" })
+                    @Html.ActionLink("Delete trainer", "Delete", "Trainers",
+                                                                   new { id = item.TrainerId },
+                                                                   new { @class = "btn btn-primary", style = "margin :10px" })
+                    @Html.ActionLink("Reset & enter new password ", "ResetPassword", "Account",
+                                                                   new { id = item.ApplicationUser.Id },
+                                                                   new { @class = "btn btn-danger", style = "margin :10px" })
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Details profile", "Details", "Trainers",
+                                                               new { id = item.TrainerId },
+                                                               new { @class = "btn btn-primary", style = "margin :10px" })
+                    @Html.ActionLink("Delete trainer", "Delete", "Trainers",
+                                                                   new { id = item.TrainerId },
+                                                                   new { @class = "btn btn-primary", style = "margin :10px" })
+                    @Html.ActionLink("Reset & enter new password ", "ResetPassword", "Account",
+                                                                   new { id = item.ApplicationUser.Id },
+                                                                   new { @class = "btn btn-danger", style = "margin :10px" })
+                }
+
             </td>
         </tr>
         }
