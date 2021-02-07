@@ -5,24 +5,65 @@
 
 @if (User.IsInRole("trainer"))
 {
-    <h2>@Model.TrainerInWeb.ApplicationUser.UserName </h2>
-    <li>Name: @Model.TrainerInWeb.ApplicationUser.FullName</li>
-    <li>Phone number: @Model.TrainerInWeb.PhoneNumber</li>
-    <li>Type: @Model.TrainerInWeb.Type</li>
-    <li>Working Place: @Model.TrainerInWeb.WorkingPlace</li>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>Full Name</th>
+            <th>PhoneNumber</th>
+            <th>Type</th>
+            <th>Working Place</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="color:black; text-align:center">
+            <td>@Model.TrainerInWeb.ApplicationUser.UserName</td>
+            <td>@Model.TrainerInWeb.ApplicationUser.FullName</td>
+            <td>@Model.TrainerInWeb.PhoneNumber</td>
+            <td>@Model.TrainerInWeb.Type</td>
+            <td>@Model.TrainerInWeb.WorkingPlace</td>
+            <td>
+                @Html.ActionLink("Update Profile", "UpdateTrainerProfile", "Account", null,
+                                 new { @class = "btn btn-primary", style = "margin: 10px" })
+                @Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null,
+                   new { @class = "btn btn-danger", style = "margin: 20px" })
+            </td>
+        </tr>
+    </tbody>
+
+</table>
 }
 @if (User.IsInRole("trainee"))
 {
-    <h2>@Model.TraineeInWeb.ApplicationUser.UserName</h2>
-    <li>Name: @Model.TraineeInWeb.ApplicationUser.FullName</li>
-    <li>Age: @Model.TraineeInWeb.Age</li>
-    <li>Location: @Model.TraineeInWeb.Location</li>
-    <li>Education: @Model.TraineeInWeb.Education</li>
-    <li>DayOfBirthday: @Model.TraineeInWeb.DayOfBirthday</li>
-    <li>ProgramingLanguage: @Model.TraineeInWeb.ProgramingLanguage</li>
-    <li>ToeicScore: @Model.TraineeInWeb.ToeicScore</li>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>User name</th>
+            <th>Full name</th>
+            <th>Age</th>
+            <th>Location</th>
+            <th>Education</th>
+            <th>DayOfBirth</th>
+            <th>ProgramLanguage</th>
+            <th>ToeicScore</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.TraineeInWeb.ApplicationUser.UserName</td>
+            <td>@Model.TraineeInWeb.ApplicationUser.FullName</td>
+            <td>@Model.TraineeInWeb.Age</td>
+            <td>@Model.TraineeInWeb.Location</td>
+            <td>@Model.TraineeInWeb.Education</td>
+            <td>@Model.TraineeInWeb.DayOfBirthday</td>
+            <td>@Model.TraineeInWeb.ProgramingLanguage</td>
+            <td>@Model.TraineeInWeb.ToeicScore</td>
+        </tr>
+    </tbody>
+
+</table>
 }
-<h2>Profile User</h2>
-<li>@Model.UserInWeb.UserName</li>
+
 
 

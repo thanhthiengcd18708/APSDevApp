@@ -55,7 +55,8 @@ namespace APSDevApp.Controllers
                 _userManager = value;
             }
         }
-        [HttpGet]
+      /*  [HttpGet]
+        [Authorize(Roles ="")]
         public ActionResult UpdateProfile()
         {
             var userIdCurrent = User.Identity.GetUserId();
@@ -74,7 +75,7 @@ namespace APSDevApp.Controllers
             userInDb.PhoneNumber = user.PhoneNumber;
             _context.SaveChanges();
             return RedirectToAction("Profile");
-        }
+        }*/
         public ActionResult ViewProfile()
         {
             var userIdCurrent = User.Identity.GetUserId();
