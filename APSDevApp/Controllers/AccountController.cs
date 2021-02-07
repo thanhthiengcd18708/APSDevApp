@@ -55,6 +55,26 @@ namespace APSDevApp.Controllers
                 _userManager = value;
             }
         }
+        [HttpGet]
+        public ActionResult UpdateProfile()
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+            ApplicationUser userinweb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
+            var userInfo = new UserProfile()
+            {
+                UserInWeb = userinweb
+            };
+            return View(userInfo);
+        }
+        [HttpPost]
+        public ActionResult UpdateProfile(ApplicationUser user)
+        {
+            var userInDb = _context.Users.SingleOrDefault(u => u.Id == user.Id);
+            userInDb.FullName = user.FullName;
+            userInDb.PhoneNumber = user.PhoneNumber;
+            _context.SaveChanges();
+            return RedirectToAction("Profile");
+        }
         public ActionResult ViewProfile()
         {
             var userIdCurrent = User.Identity.GetUserId();
@@ -145,24 +165,25 @@ namespace APSDevApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("ViewProfile");
         }
-        //Get/Account/ResetPasswordUser
+        //Get/Account/ChangePasswordUser
         [Authorize(Roles = "trainer,trainee")]
-        public ActionResult ResetPasswordUser()
+        public ActionResult ChangePasswordUser()
         {
             var userIdCurrent = User.Identity.GetUserId();
             ApplicationUser useInWeb = _context.Users.FirstOrDefault(c => c.Id == userIdCurrent);
             var userPass = _context.Users.SingleOrDefault(m => m.Id == useInWeb.Id);
             if (userPass == null) return HttpNotFound();
-            var resetPassUser = new ResetPasswordViewModel()
+            var changePassUser = new ResetPasswordViewModel()
             {
                 User = useInWeb
             };
-            return View(resetPassUser);
+            return View(changePassUser);
         }
-        // POST: /Account/ResetPassword
+
+        // POST: /Account/ChangePasswordUser
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPasswordUser(ResetPasswordViewModel model)
+        public async Task<ActionResult> ChangePasswordUser(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {

@@ -70,11 +70,21 @@ namespace APSDevApp.Controllers
 
         public ActionResult Delete(string id)
         {
+            var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);     
             var trainerInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == id);
+            if (userInDb == null)
+            {
 
-            if (trainerInDb == null) return HttpNotFound();
+                return HttpNotFound();
+            }
 
+
+            if (trainerInDb == null)
+            {
+                return HttpNotFound();
+            }
             _context.Trainers.Remove(trainerInDb);
+            _context.Users.Remove(userInDb);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

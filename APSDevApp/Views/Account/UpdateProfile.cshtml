@@ -1,0 +1,24 @@
+﻿@model APSDevApp.ViewModels.UserProfile
+@{
+    ViewBag.Title = "UpdateProfile";
+}
+
+<h2>UpdateProfile</h2>
+@using (Html.BeginForm("UpdateProfile", "Account", "POST"))
+{
+    @Html.HiddenFor(model => model.UserInWeb.Id)
+    <div class="form-row">
+        <div class="col">
+            @Html.LabelFor(model => model.UserInWeb.FullName)
+            @Html.TextBoxFor(model => model.UserInWeb.FullName, new { @class = "form-control", })
+        </div>
+        <div class="col">
+            @Html.LabelFor(model => model.UserInWeb.PhoneNumber)
+            @Html.TextBoxFor(model => model.UserInWeb.PhoneNumber, new { @class = "form-control", })
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" style="margin-left: 20px">Save Change</button>
+    </div>
+}
+
