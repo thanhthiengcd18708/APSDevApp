@@ -19,6 +19,7 @@ namespace APSDevApp.Models
 
         public virtual Trainer TrainerUser { get; set; }
         public virtual Trainee TraineeUser { get; set; }
+        public virtual Staff StaffUser { get; set; }
         public ApplicationUser()
         {
 

@@ -339,7 +339,14 @@ namespace APSDevApp.Controllers
                         }
                         return RedirectToAction("Index", "Home");
                     }
-                    else return RedirectToAction("Index", "Home");
+                    else if (model.RoleName == "staff")
+                    {
+                        var newStaff = new Staff();
+                        newStaff.StaffId = user.Id;
+                        _context.Staffs.Add(newStaff);
+                        _context.SaveChanges();
+                        return RedirectToAction("Index", "Staffs");
+                    }
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

@@ -1,13 +1,13 @@
-﻿@model IEnumerable<APSDevApp.Models.Trainee>
+﻿@model IEnumerable<APSDevApp.Models.Staff>
 @{ ViewBag.Title = "Index";
 }
 
-<h2>Trainees' Index</h2>
-@using (Html.BeginForm("Index", "Trainees", "POST"))
+<h2>Staffs' Index</h2>
+@using (Html.BeginForm("Index", "Staffs", "POST"))
 {
     <div class="form-group">
-        <label for="fname">Search by Trainee's :</label><br>
-        @Html.TextBox("searchInput", null, new { @class = "form-control" ,style= "margin :10px" })
+        <label for="fname">Search by Staff Name:</label><br>
+        @Html.TextBox("searchInput", null, new { @class = "form-control", style = "margin :10px" })
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Search</button>
@@ -18,10 +18,8 @@
         <tr>
             <th>E-mail</th>
             <th>Full name</th>
-            <th>Programming language</th>
             <th>Age</th>
-            <th>Education level</th>
-            <th>Address</th>
+            <th>Location</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -31,19 +29,14 @@
             <tr>
                 <td>@item.ApplicationUser.UserName</td>
                 <td>@item.ApplicationUser.FullName</td>
-                <td>@item.ProgramingLanguage</td>
                 <td>@item.Age</td>
-                <td>@item.Education</td>
                 <td>@item.Location</td>
                 <td>
-                    @Html.ActionLink("Details profile", "Details", "Trainees",
-                                                          new { id = item.TraineeId },
-                                                          new { @class = "btn btn-primary", style = "margin :10px" })
-                    @Html.ActionLink("Edit profile", "Update", "Trainees",
-                                                          new { id = item.TraineeId },
+                    @Html.ActionLink("Edit profile", "Update", "Staffs",
+                                                          new { id = item.StaffId },
                                                           new { @class = "btn btn-danger", style = "margin :10px" })
-                    @Html.ActionLink("Delete trainee", "Delete", "Trainees",
-                                                          new { id = item.TraineeId },
+                    @Html.ActionLink("Delete staff account", "Delete", "Staffs",
+                                                          new { id = item.StaffId },
                                                           new { @class = "btn btn-primary", style = "margin :10px" })
                     @Html.ActionLink("Reset & enter new password", "ResetPassword", "Account",
                                                           new { id = item.ApplicationUser.Id },
