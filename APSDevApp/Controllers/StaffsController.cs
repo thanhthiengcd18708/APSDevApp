@@ -1,4 +1,5 @@
 ﻿using APSDevApp.Models;
+using APSDevApp.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace APSDevApp.Controllers
 {
+    [Authorize(Roles = "admin,staff")]
     public class StaffsController : Controller
     {
         private ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace APSDevApp.Controllers
             );
         }
         // GET: Staffs
+        [Authorize(Roles = "admin")]
         public ActionResult Index(string searchInput)
         {
             var staffs = _context.Staffs.ToList();
@@ -32,6 +35,7 @@ namespace APSDevApp.Controllers
             }
             return View(staffs);
         }
+        [Authorize(Roles = "admin")]
         public ActionResult Update(string id)
         {
             var staffInDb = _context.Staffs.SingleOrDefault(t => t.StaffId == id);
@@ -42,6 +46,7 @@ namespace APSDevApp.Controllers
             return View(staffInDb);
         }
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult Update(Staff staff)
         {
             if (!ModelState.IsValid)
@@ -58,6 +63,7 @@ namespace APSDevApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(string id)
         {
             var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
@@ -77,4 +83,6 @@ namespace APSDevApp.Controllers
             return RedirectToAction("Index");
         }
     }
+
+
 }

@@ -1,0 +1,41 @@
+﻿@model APSDevApp.ViewModels.UserProfile
+@{
+    ViewBag.Title = "ViewProfile";
+}
+<h2 style="text-align: center"> View Profile</h2>
+
+
+@if (Model.TraineeInWeb != null || Model.UserInWeb != null)
+{
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User name</th>
+                    <th>Full name</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                    <th>Education</th>
+                    <th>DayOfBirth</th>
+                    <th>ProgramLanguage</th>
+                    <th>ToeicScore</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.TraineeInWeb.ApplicationUser.UserName</td>
+                    <td>@Model.TraineeInWeb.ApplicationUser.FullName</td>
+                    <td>@Model.TraineeInWeb.Age</td>
+                    <td>@Model.TraineeInWeb.Location</td>
+                    <td>@Model.TraineeInWeb.Education</td>
+                    <td>@Model.TraineeInWeb.DayOfBirthday</td>
+                    <td>@Model.TraineeInWeb.ProgramingLanguage</td>
+                    <td>@Model.TraineeInWeb.ToeicScore</td>
+
+
+                </tr>
+            </tbody>
+
+        </table>
+}
+

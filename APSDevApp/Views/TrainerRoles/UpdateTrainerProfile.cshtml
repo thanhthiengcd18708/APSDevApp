@@ -4,12 +4,12 @@
 
 <h2>Update trainer's profile</h2>
 
-@using (Html.BeginForm("UpdateTrainerProfile", "Account","POST"))
+@using (Html.BeginForm("UpdateTrainerProfile", "TrainerRoles", "POST"))
 {
 
     @Html.HiddenFor(model => model.TrainerId)
 
-@**@    <div>
+    @**@ <div>
         @Html.LabelFor(model => model.ApplicationUser.FullName)
         @Html.TextAreaFor(model => model.ApplicationUser.FullName, new { @class = "form-control", style = "width:350px" })
     </div>
@@ -17,17 +17,23 @@
 
     <div>
         @Html.LabelFor(model => model.PhoneNumber)
-        @Html.TextBoxFor(model => model.PhoneNumber, new{ @class = "form-control",@*style = "width:350px"*@})
+        @Html.TextBoxFor(model => model.PhoneNumber, new
+        {
+            @class = "form-control",@*style = "width:350px"*@})
     </div>
 
     <div>
         @Html.LabelFor(model => model.WorkingPlace)
-        @Html.TextAreaFor(model => model.WorkingPlace, new{ @class = "form-control",@*style = "width:350px"*@})
+        @Html.TextAreaFor(model => model.WorkingPlace, new
+        {
+            @class = "form-control",@*style = "width:350px"*@})
     </div>
 
     <div>
         @Html.LabelFor(model => model.Type)
-        @Html.EnumDropDownListFor(model => model.Type, new{ @class = "form-control",@*style = "width:350px" *@})
+        @Html.EnumDropDownListFor(model => model.Type, new
+        {
+            @class = "form-control",@*style = "width:350px" *@})
     </div>
 
     <div>

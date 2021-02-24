@@ -23,7 +23,6 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("staff"))
                     {
-
                         <li class="nav-item">@Html.ActionLink("Trainer", "Index", "Trainers", null, new { Style = "color:white" })</li>
                         <li class="nav-item">@Html.ActionLink("Trainee", "Index", "Trainees", null, new { Style = "color:white" })</li>
                         <li class="nav-item">@Html.ActionLink("Course", "Index", "Courses", null, new { Style = "color:white" })</li>
@@ -32,15 +31,15 @@
                     }
                     @if (User.IsInRole("trainer"))
                     {
-                        <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "Account", null, new { Style = "color:white" })</li>
-                        <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "Account", null, new { Style = "color:white" })</li>
-        
+                        <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "TrainerRoles", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "TrainerRoles", null, new { Style = "color:white" })</li>
+
                         <li class="nav-item">@Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null, new { Style = "color:white" })</li>
                     }
                     @if (User.IsInRole("trainee"))
                     {
-                        <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "Account", null, new { Style = "color:white" })</li>
-                        <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "Account", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "TraineeRoles", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "TraineeRoles", null, new { Style = "color:white" })</li>
                         <li class="nav-item">@Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null, new { Style = "color:white" })</li>
                     }
 

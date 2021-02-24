@@ -26,9 +26,7 @@
             <tr>
                 <td>@item.ApplicationUser.UserName</td>
                 <td>
-                    @Html.ActionLink("Edit profile", "Update", "Staffs",
-                                                          new { id = item.StaffId },
-                                                          new { @class = "btn btn-danger", style = "margin :10px" })
+                   
                     @Html.ActionLink("Delete staff account", "Delete", "Staffs",
                                                           new { id = item.StaffId },
                                                           new { @class = "btn btn-primary", style = "margin :10px" })

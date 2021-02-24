@@ -11,10 +11,11 @@ using System;
 using System.Globalization;
 using APSDevApp.ViewModels;
 using System.Data.Entity;
+using System.Web.Security;
 
 namespace APSDevApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin,staff, trainer,trainee")]
     public class AccountController : Controller
     {
         private ApplicationDbContext _context;
@@ -55,113 +56,7 @@ namespace APSDevApp.Controllers
                 _userManager = value;
             }
         }
-        /*  [HttpGet]
-          [Authorize(Roles ="")]
-          public ActionResult UpdateProfile()
-          {
-              var userIdCurrent = User.Identity.GetUserId();
-              ApplicationUser userinweb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
-              var userInfo = new UserProfile()
-              {
-                  UserInWeb = userinweb
-              };
-              return View(userInfo);
-          }
-          [HttpPost]
-          public ActionResult UpdateProfile(ApplicationUser user)
-          {
-              var userInDb = _context.Users.SingleOrDefault(u => u.Id == user.Id);
-              userInDb.FullName = user.FullName;
-              userInDb.PhoneNumber = user.PhoneNumber;
-              _context.SaveChanges();
-              return RedirectToAction("Profile");
-          }*/
-        public ActionResult ViewProfile()
-        {
-            var userIdCurrent = User.Identity.GetUserId();
-            var userInWeb = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
-            if (User.IsInRole("trainer"))
-            {
-                var trainerInWeb = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
-                /* var courseTrainer = _context.Courses.SingleOrDefault(c => c.Id == trainerInWeb.CourseId);*/
-                var trainerInfor = new UserProfile()
-                {
-                    UserInWeb = userInWeb,
-                    TrainerInWeb = trainerInWeb
-                };
-                return View(trainerInfor);
-            }
-            if (User.IsInRole("trainee"))
-            {
-                var traineeInWeb = _context.Trainees.SingleOrDefault(t => t.TraineeId == userInWeb.Id);
-                var traineeInfor = new UserProfile()
-                {
-                    UserInWeb = userInWeb,
-                    TraineeInWeb = traineeInWeb
-                };
-                return View(traineeInfor);
-            }
 
-            var userInfor = new UserProfile()
-            {
-                UserInWeb = userInWeb
-            };
-            return View(userInfor);
-
-        }
-        public ActionResult ViewCourse()
-        {
-            var userIdCurrent = User.Identity.GetUserId();
-            var userInWeb = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
-            if (User.IsInRole("trainer"))
-            {
-                var trainerInWeb = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
-                var courseTrainer = _context.Courses.SingleOrDefault(c => c.Id == trainerInWeb.CourseId);
-                var courses = _context.Courses.Include(c => c.Category).ToList();
-                var trainerInfor = new UserProfile()
-                {
-                    UserInWeb = userInWeb,
-                    TrainerInWeb = trainerInWeb
-                };
-                return View(courseTrainer);
-            }
-            else if (User.IsInRole("trainee"))
-            {
-                var traineeInWeb = _context.Trainees.SingleOrDefault(t => t.TraineeId == userInWeb.Id);
-                var courseTrainee = _context.Courses.SingleOrDefault(c => c.Id == traineeInWeb.CourseId);
-                var courses = _context.Courses.Include(c => c.Category).ToList();
-                var traineeInfor = new UserProfile()
-                {
-                    UserInWeb = userInWeb,
-                    TraineeInWeb = traineeInWeb
-                };
-                return View(courseTrainee);
-            }
-            return HttpNotFound();
-        }
-
-        //Update Trainer profile
-        [Authorize(Roles = "trainer")]
-        [HttpGet]
-        public ActionResult UpdateTrainerProfile()
-        {
-            var userIdCurrent = User.Identity.GetUserId();
-            ApplicationUser userInWeb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
-            var trainerProFi = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
-
-            return View(trainerProFi);
-        }
-        [HttpPost]
-        public ActionResult UpdateTrainerProfile(Trainer trainer)
-        {
-            var trainerProInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == trainer.TrainerId);
-            trainerProInDb.ApplicationUser.FullName = trainer.ApplicationUser.FullName;
-            trainerProInDb.PhoneNumber = trainer.PhoneNumber;
-            trainerProInDb.WorkingPlace = trainer.WorkingPlace;
-            trainerProInDb.Type = trainer.Type;
-            _context.SaveChanges();
-            return RedirectToAction("ViewProfile");
-        }
         //Get/Account/ChangePasswordUser
         [Authorize(Roles = "trainer,trainee")]
         public ActionResult ChangePasswordUser()
@@ -219,7 +114,6 @@ namespace APSDevApp.Controllers
             {
                 return View(model);
             }
-
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -424,6 +318,7 @@ namespace APSDevApp.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
+        [Authorize(Roles = "trainer,trainee")]
         public ActionResult ResetPassword(string id)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
@@ -579,7 +474,13 @@ namespace APSDevApp.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Login", "Account");
+        }
         //
         // POST: /Account/LogOff
         [HttpPost]

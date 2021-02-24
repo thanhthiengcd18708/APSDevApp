@@ -5,7 +5,7 @@
 
 <h2>View Course </h2>
 
-@Html.ActionLink("Back to Profile", "ViewProfile", "Account",
+@Html.ActionLink("Back to Profile", "ViewProfile", "TraineeRoles",
     null,
     new { @class = "btn btn-primary" })
 <table class="table table-bordered">
@@ -21,11 +21,11 @@
         {
 
 
-                <tr style="color:black; text-align:center">
-                    <td>@Model.Name</td>
-                    <td>@Model.Description</td>
-                    <td>@Model.Category.Name</td>
-                </tr>
+            <tr style="color:black; text-align:center">
+                <td>@Model.Name</td>
+                <td>@Model.Description</td>
+                <td>@Model.Category.Name</td>
+            </tr>
         }
 
     </tbody>

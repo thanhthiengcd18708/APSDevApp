@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace APSDevApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ApplicationDbContext _context;

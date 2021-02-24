@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace APSDevApp.Controllers
 {
+    [Authorize(Roles = "staff")]
     public class AssignController : Controller
     {
         private ApplicationDbContext _context;

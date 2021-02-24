@@ -1,0 +1,49 @@
+﻿@model APSDevApp.ViewModels.UserProfile
+@{
+    ViewBag.Title = "ViewProfile";
+}
+
+<h2>ViewProfile</h2>
+@if (Model.TrainerInWeb != null || Model.UserInWeb != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Full Name</th>
+                @if (Model.TrainerInWeb != null)
+                {
+                    <th>PhoneNumber</th>
+                    <th>Type</th>
+                    <th>Working Place</th>
+                    <th>Action</th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="color:black; text-align:center">
+                <td>@Model.UserInWeb.UserName</td>
+                <td>@Model.UserInWeb.FullName</td>
+                @if (Model.TrainerInWeb != null)
+                {
+                    <td>@Model.TrainerInWeb.PhoneNumber</td>
+                    <td>@Model.TrainerInWeb.Type</td>
+                    <td>@Model.TrainerInWeb.WorkingPlace</td>
+                    <td>
+                        @Html.ActionLink("Update Profile", "UpdateTrainerProfile", "TrainerRoles", null,
+                              new { @class = "btn btn-primary", style = "margin: 10px" })
+                        @Html.ActionLink("Change Password", "ChangePasswordUser", "TrainerRoles", null,
+                  new { @class = "btn btn-danger", style = "margin: 20px" })
+                    </td>
+                }
+            </tr>
+        </tbody>
+
+    </table>
+
+}
+
+
+
+
