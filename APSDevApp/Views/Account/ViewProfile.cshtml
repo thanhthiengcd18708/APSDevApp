@@ -32,14 +32,15 @@
                         <td>@Model.TrainerInWeb.PhoneNumber</td>
                         <td>@Model.TrainerInWeb.Type</td>
                         <td>@Model.TrainerInWeb.WorkingPlace</td>
-                    }
+
 
                     <td>
                         @Html.ActionLink("Update Profile", "UpdateTrainerProfile", "Account", null,
-                                    new { @class = "btn btn-primary", style = "margin: 10px" })
+                                         new { @class = "btn btn-primary", style = "margin: 10px" })
                         @Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null,
-                        new { @class = "btn btn-danger", style = "margin: 20px" })
+                             new { @class = "btn btn-danger", style = "margin: 20px" })
                     </td>
+                    }
                 </tr>
             </tbody>
 
