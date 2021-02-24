@@ -55,27 +55,27 @@ namespace APSDevApp.Controllers
                 _userManager = value;
             }
         }
-      /*  [HttpGet]
-        [Authorize(Roles ="")]
-        public ActionResult UpdateProfile()
-        {
-            var userIdCurrent = User.Identity.GetUserId();
-            ApplicationUser userinweb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
-            var userInfo = new UserProfile()
-            {
-                UserInWeb = userinweb
-            };
-            return View(userInfo);
-        }
-        [HttpPost]
-        public ActionResult UpdateProfile(ApplicationUser user)
-        {
-            var userInDb = _context.Users.SingleOrDefault(u => u.Id == user.Id);
-            userInDb.FullName = user.FullName;
-            userInDb.PhoneNumber = user.PhoneNumber;
-            _context.SaveChanges();
-            return RedirectToAction("Profile");
-        }*/
+        /*  [HttpGet]
+          [Authorize(Roles ="")]
+          public ActionResult UpdateProfile()
+          {
+              var userIdCurrent = User.Identity.GetUserId();
+              ApplicationUser userinweb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
+              var userInfo = new UserProfile()
+              {
+                  UserInWeb = userinweb
+              };
+              return View(userInfo);
+          }
+          [HttpPost]
+          public ActionResult UpdateProfile(ApplicationUser user)
+          {
+              var userInDb = _context.Users.SingleOrDefault(u => u.Id == user.Id);
+              userInDb.FullName = user.FullName;
+              userInDb.PhoneNumber = user.PhoneNumber;
+              _context.SaveChanges();
+              return RedirectToAction("Profile");
+          }*/
         public ActionResult ViewProfile()
         {
             var userIdCurrent = User.Identity.GetUserId();
@@ -149,17 +149,13 @@ namespace APSDevApp.Controllers
             ApplicationUser userInWeb = _context.Users.FirstOrDefault(x => x.Id == userIdCurrent);
             var trainerProFi = _context.Trainers.SingleOrDefault(t => t.TrainerId == userInWeb.Id);
 
-            var trainerInFor = new UserProfile()
-            {
-                UserInWeb = userInWeb,
-                TrainerInWeb = trainerProFi
-            };
-            return View(trainerInFor);
+            return View(trainerProFi);
         }
         [HttpPost]
         public ActionResult UpdateTrainerProfile(Trainer trainer)
         {
             var trainerProInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == trainer.TrainerId);
+            trainerProInDb.ApplicationUser.FullName = trainer.ApplicationUser.FullName;
             trainerProInDb.PhoneNumber = trainer.PhoneNumber;
             trainerProInDb.WorkingPlace = trainer.WorkingPlace;
             trainerProInDb.Type = trainer.Type;
@@ -307,6 +303,12 @@ namespace APSDevApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var checkuser = _context.Users.Where(u => u.UserName == model.Email);
+                if (checkuser.Any())
+                {
+
+                    return RedirectToAction("Index", "Home");
+                }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
 

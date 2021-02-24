@@ -1,33 +1,33 @@
-﻿@model APSDevApp.ViewModels.UserProfile
+﻿@model APSDevApp.Models.Trainer
 @{ ViewBag.Title = "UpdateTrainerProfile";
 }
 
 <h2>Update trainer's profile</h2>
 
-@using (Html.BeginForm("UpdateTrainerProfile", "Account", "POST"))
+@using (Html.BeginForm("UpdateTrainerProfile", "Account","POST"))
 {
 
-    @Html.HiddenFor(model => model.TrainerInWeb.TrainerId)
+    @Html.HiddenFor(model => model.TrainerId)
 
-@*    <div>
-        @Html.LabelFor(model => model.UserInWeb.FullName)
-        @Html.TextAreaFor(model => model.UserInWeb.FullName, new { @class = "form-control", style = "width:350px" })
-    </div>*@
+@**@    <div>
+        @Html.LabelFor(model => model.ApplicationUser.FullName)
+        @Html.TextAreaFor(model => model.ApplicationUser.FullName, new { @class = "form-control", style = "width:350px" })
+    </div>
 
 
     <div>
-        @Html.LabelFor(model => model.TrainerInWeb.PhoneNumber)
-        @Html.TextBoxFor(model => model.TrainerInWeb.PhoneNumber, new{ @class = "form-control",@*style = "width:350px"*@})
+        @Html.LabelFor(model => model.PhoneNumber)
+        @Html.TextBoxFor(model => model.PhoneNumber, new{ @class = "form-control",@*style = "width:350px"*@})
     </div>
 
     <div>
-        @Html.LabelFor(model => model.TrainerInWeb.WorkingPlace)
-        @Html.TextAreaFor(model => model.TrainerInWeb.WorkingPlace, new{ @class = "form-control",@*style = "width:350px"*@})
+        @Html.LabelFor(model => model.WorkingPlace)
+        @Html.TextAreaFor(model => model.WorkingPlace, new{ @class = "form-control",@*style = "width:350px"*@})
     </div>
 
     <div>
-        @Html.LabelFor(model => model.TrainerInWeb.Type)
-        @Html.EnumDropDownListFor(model => model.TrainerInWeb.Type, new{ @class = "form-control",@*style = "width:350px" *@})
+        @Html.LabelFor(model => model.Type)
+        @Html.EnumDropDownListFor(model => model.Type, new{ @class = "form-control",@*style = "width:350px" *@})
     </div>
 
     <div>

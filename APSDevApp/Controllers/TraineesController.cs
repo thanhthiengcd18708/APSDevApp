@@ -14,6 +14,8 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace APSDevApp.Controllers
 {
+    [Authorize(Roles = "staff")]
+
     public class TraineesController : Controller
     {
         public ApplicationDbContext _context;
@@ -28,7 +30,7 @@ namespace APSDevApp.Controllers
             if (!searchInput.IsNullOrWhiteSpace())
             {
                 trainees = _context.Trainees
-                     .Where(c => c.ApplicationUser.FullName.Contains(searchInput) || 
+                     .Where(c => c.ApplicationUser.FullName.Contains(searchInput) ||
                      c.ProgramingLanguage.Contains(searchInput) || c.ToeicScore.Contains(searchInput))
                      .ToList();
             }

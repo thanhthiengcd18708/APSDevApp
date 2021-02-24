@@ -27,7 +27,7 @@ namespace APSDevApp.Controllers
             if (!searchInput.IsNullOrWhiteSpace())
             {
                 staffs = _context.Staffs
-                     .Where(s => s.ApplicationUser.FullName.Contains(searchInput))
+                     .Where(s => s.ApplicationUser.UserName.Contains(searchInput))
                      .ToList();
             }
             return View(staffs);

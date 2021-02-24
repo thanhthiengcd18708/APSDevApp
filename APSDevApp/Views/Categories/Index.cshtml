@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index Category</h2>
+<h2 style="text-align: center; color: orangered">Manage Category</h2>
 
 @Html.ActionLink("Create new Category", "Create", "Categories",
     null,
@@ -31,19 +31,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>
-                    @Html.ActionLink("Details", "Details", "Categories", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Update", "Update", "Categories", new { id = item.Id }, new { @class = "btn btn-dark" })
-                    @Html.ActionLink("Delete", "Delete", "Categories", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", "Categories", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Update", "Update", "Categories", new { id = item.Id }, new { @class = "btn btn-dark" })
+                        @Html.ActionLink("Delete", "Delete", "Categories", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
         }
+
     </tbody>
 </table>
 @Html.ActionLink("Back to Courses Index", "Index", "Courses",

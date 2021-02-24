@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 namespace APSDevApp.Controllers
 {
+    [Authorize(Roles = "staff")]
     public class CoursesController : Controller
     {
         // GET: Courses
@@ -39,16 +40,35 @@ namespace APSDevApp.Controllers
         [HttpPost]
         public ActionResult Create(Course course)
         {
-            if (!ModelState.IsValid) return View();
-            var newCourse = new Course()
-            {
-                CategoryId = course.CategoryId,
-                Name = course.Name,
-                Description = course.Description
 
-            };
-            _context.Courses.Add(newCourse);
-            _context.SaveChanges();
+            if (course.CategoryId == null)
+            {
+                return RedirectToAction("Create");
+            }
+
+            var checkCourse = _context.Courses.Where(t => t.Name == course.Name);
+
+            if (checkCourse.Count() > 0)
+            {
+                return RedirectToAction("Create");
+            }
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                var newCourse = new Course()
+                {
+                    Name = course.Name,
+                    Description = course.Description,
+                    IsAvailable = course.IsAvailable,
+                    CategoryId = course.CategoryId
+
+                };
+                _context.Courses.Add(newCourse);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
         public ActionResult Details(int id)

@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace APSDevApp.Controllers
 {
+    [Authorize(Roles = "staff,admin")]
     public class TrainersController : Controller
     {
 
@@ -24,16 +25,33 @@ namespace APSDevApp.Controllers
         }
         public ActionResult Index(string searchInput)
         {
-            var trainers = _context.Trainers.ToList();
+            if (User.IsInRole("admin"))
+            {
+                var users = _context.Users
+                .Where(u => u.Roles.Any(r => r.RoleId == "3"))
+                .ToList();
+                var trainerAdminAccount = new ListTrainerAccount()
+                {
+                    Users = users,
 
+                };
+                return View(trainerAdminAccount);
+
+            }
+            var trainers = _context.Trainers.ToList();
             if (!searchInput.IsNullOrWhiteSpace())
             {
                 trainers = _context.Trainers
-                     .Where(c => c.ApplicationUser.FullName.Contains(searchInput)
-                     || c.WorkingPlace.Contains(searchInput))
-                     .ToList();
+                    .Where(t => t.ApplicationUser.Email.Contains(searchInput) ||
+                    t.ApplicationUser.FullName.Contains(searchInput))
+                    .ToList();
             }
-            return View(trainers);
+            var trainerAccount = new ListTrainerAccount()
+            {
+                Trainers = trainers,
+
+            };
+            return View(trainerAccount);
         }
         public ActionResult Details(string id)
         {
@@ -69,22 +87,34 @@ namespace APSDevApp.Controllers
 
         public ActionResult Delete(string id)
         {
-            var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);     
-            var trainerInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == id);
-            if (userInDb == null)
+            if (User.IsInRole("admin"))
+            {
+                var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
+                if (userInDb == null)
+                {
+
+                    return RedirectToAction("Index");
+                }
+                var trainerInDb = _context.Trainers.SingleOrDefault(t => t.TrainerId == id);
+                if (trainerInDb != null)
+                {
+                    _context.Trainers.Remove(trainerInDb);
+
+                }
+                _context.Users.Remove(userInDb);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            var trainer = _context.Trainers.SingleOrDefault(t => t.TrainerId == id);
+            if (trainer == null)
             {
 
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
-
-
-            if (trainerInDb == null)
-            {
-                return HttpNotFound();
-            }
-            _context.Trainers.Remove(trainerInDb);
-            _context.Users.Remove(userInDb);
+            _context.Trainers.Remove(trainer);
             _context.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

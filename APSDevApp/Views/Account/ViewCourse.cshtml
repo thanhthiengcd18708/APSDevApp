@@ -3,7 +3,7 @@
     ViewBag.Title = "ViewCourse";
 }
 
-<h2>View Course user</h2>
+<h2>View Course </h2>
 
 @Html.ActionLink("Back to Profile", "ViewProfile", "Account",
     null,
@@ -17,11 +17,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr style="color:black; text-align:center">
-                <td>@Model.Name</td>
-                 <td>@Model.Description</td>
-                 <td>@Model.Category.Name</td>
-            </tr>
+        @if (Model != null)
+        {
+
+
+                <tr style="color:black; text-align:center">
+                    <td>@Model.Name</td>
+                    <td>@Model.Description</td>
+                    <td>@Model.Category.Name</td>
+                </tr>
+        }
+
     </tbody>
 </table>
 

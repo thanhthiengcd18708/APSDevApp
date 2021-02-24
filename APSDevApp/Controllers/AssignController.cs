@@ -44,7 +44,7 @@ namespace APSDevApp.Controllers
             var trainer = _context.Trainers.SingleOrDefault(t => t.TrainerId == TrainerId);
             trainer.CourseId = courseId;
             _context.SaveChanges();
-            return RedirectToAction("Index/" , new { id= CourseId});
+            return RedirectToAction("Index/", new { id = CourseId });
         }
         [HttpGet]
         public ActionResult ChangeTrainerAssign(int CourseId, string TrainerId)

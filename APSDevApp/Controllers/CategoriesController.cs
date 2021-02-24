@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace APSDevApp.Controllers
 {
+    [Authorize(Roles = "staff")]
     public class CategoriesController : Controller
     {
         // GET: Courses
@@ -33,15 +34,26 @@ namespace APSDevApp.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid)
+            {
+
+                return View();
+            }
+            var checkCategory = _context.Categories.Where(t => t.Name == category.Name);
+            if (checkCategory.Count() > 0)
+            {
+
+                return RedirectToAction("Index");
+            }
             var newCategory = new Category()
             {
                 Name = category.Name,
-                Description = category.Description,
+                Description = category.Description
             };
-
             _context.Categories.Add(newCategory);
+
             _context.SaveChanges();
+
             return RedirectToAction("Index");
 
         }
@@ -74,7 +86,7 @@ namespace APSDevApp.Controllers
             if (categoryInDb == null)
 
             {
-               return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             var course = _context.Courses.Where(t => t.CategoryId == id);
 

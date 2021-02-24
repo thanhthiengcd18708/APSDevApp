@@ -1,70 +1,99 @@
-﻿@model IEnumerable<APSDevApp.Models.Trainer>
+﻿@model APSDevApp.ViewModels.ListTrainerAccount
 @{ ViewBag.Title = "Index";
 
 }
-<h2 style="text-align: center">Trainers Index</h2>
+<h2 style="text-align: center">Manage Trainer</h2>
+
 @using (Html.BeginForm("Index", "Trainers", "POST"))
 {
-    <div >
-        <label >Search by Trainer's  :</label>
+    <div>
+        <label>Search by Trainer's  :</label>
         @Html.TextBox("searchInput", null,
            new { @class = "form-control", Style = "margin: 10px" })
     </div>
-    <div >
+    <div>
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
 }
-<table class="table table-bordered" >
-    <thead  >
-        <tr>
-            <th>E-mail</th>
-            <th>Full name</th>
-            <th>Phone number</th>
-            <th>Type</th>
-            <th>Working Place</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <th>@item.ApplicationUser.UserName</th>
-            <th>@item.ApplicationUser.FullName</th>
-            <td>@item.PhoneNumber</td>
-            <td>@item.Type</td>
-            <td>@item.WorkingPlace</td>
-            <td>
-                @if (User.IsInRole("staff"))
-                {
-                    @Html.ActionLink("Details profile", "Details", "Trainers",
-                                                               new { id = item.TrainerId },
-                                                               new { @class = "btn btn-primary", style = "margin :10px" })
-                    @Html.ActionLink("Edit profile", "Update", "Trainers",
-                                                                   new { id = item.TrainerId },
-                                                                   new { @class = "btn btn-danger", style = "margin :10px" })
-                    @Html.ActionLink("Delete trainer", "Delete", "Trainers",
-                                                                   new { id = item.TrainerId },
-                                                                   new { @class = "btn btn-primary", style = "margin :10px" })
-                    @Html.ActionLink("Reset & enter new password ", "ResetPassword", "Account",
-                                                                   new { id = item.ApplicationUser.Id },
-                                                                   new { @class = "btn btn-danger", style = "margin :10px" })
-                }
-                @if (User.IsInRole("admin"))
-                {
-                    @Html.ActionLink("Details profile", "Details", "Trainers",
-                                                               new { id = item.TrainerId },
-                                                               new { @class = "btn btn-primary", style = "margin :10px" })
-                    @Html.ActionLink("Delete trainer", "Delete", "Trainers",
-                                                                   new { id = item.TrainerId },
-                                                                   new { @class = "btn btn-primary", style = "margin :10px" })
-                    @Html.ActionLink("Reset & enter new password ", "ResetPassword", "Account",
-                                                                   new { id = item.ApplicationUser.Id },
-                                                                   new { @class = "btn btn-danger", style = "margin :10px" })
-                }
 
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@if (Model.Users != null)
+{
+    if (User.IsInRole("admin"))
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>E-mail</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Users)
+                {
+                    <tr>
+                        <th>@item.Email</th>
+                        <td>
+
+
+                            @Html.ActionLink("Delete trainer", "Delete", "Trainers",
+                                                                new { id = item.Id },
+                                                                new { @class = "btn btn-primary", style = "margin :10px" })
+                            @Html.ActionLink("Reset password ", "ResetPassword", "Account",
+                                                                new { id = item.Id },
+                                                                new { @class = "btn btn-danger", style = "margin :10px" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    if (User.IsInRole("staff"))
+    {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>E-mail</th>
+                        <th>Full name</th>
+                        <th>Phone number</th>
+                        <th>Type</th>
+                        <th>Working Place</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Trainers)
+                    {
+                        <tr>
+                            <th>@item.ApplicationUser.Email</th>
+                            <th>@item.ApplicationUser.FullName</th>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.Type</td>
+                            <td>@item.WorkingPlace</td>
+                            <td>
+
+                                @Html.ActionLink("Details profile", "Details", "Trainers",
+                                                    new { id = item.TrainerId },
+                                                    new { @class = "btn btn-primary", style = "margin :10px" })
+                                @Html.ActionLink("Edit profile", "Update", "Trainers",
+                                                        new { id = item.TrainerId },
+                                                        new { @class = "btn btn-danger", style = "margin :10px" })
+                                @Html.ActionLink("Delete trainer", "Delete", "Trainers",
+                                                        new { id = item.TrainerId },
+                                                        new { @class = "btn btn-primary", style = "margin :10px" })
+                                @Html.ActionLink("Reset password ", "ResetPassword", "Account",
+                                                        new { id = item.ApplicationUser.Id },
+                                                        new { @class = "btn btn-danger", style = "margin :10px" })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    }
+
+}
+
+

@@ -24,6 +24,11 @@
         new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Course.CategoryId, "", new { @class = "text-danger" })
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Course.IsAvailable)
+        @Html.CheckBoxFor(model => model.Course.IsAvailable, new { @class = "form-control", style = "width:300px" })
+    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Create a Course</button>
     </div>

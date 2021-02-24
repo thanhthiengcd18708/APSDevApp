@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2> Course Page</h2>
+<h2 style="text-align: center; color: orangered"> Manage Course</h2>
 
 @Html.ActionLink("Create new Course", "Create", "Courses",
     null,
@@ -32,20 +32,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model != null)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>@item.Category.Name</td>
-                <td>
-                    @Html.ActionLink("ViewAssign", "Index", "Assign", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Update", "Update", "Courses", new { id = item.Id }, new { @class = "btn btn-dark" })
-                    @Html.ActionLink("Delete", "Delete", "Courses", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Category.Name</td>
+                    <td>
+                        @Html.ActionLink("ViewAssign", "Index", "Assign", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Details", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Update", "Update", "Courses", new { id = item.Id }, new { @class = "btn btn-dark" })
+                        @Html.ActionLink("Delete", "Delete", "Courses", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

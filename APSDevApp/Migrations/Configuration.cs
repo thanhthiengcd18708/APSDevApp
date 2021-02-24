@@ -23,8 +23,8 @@ namespace APSDevApp.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-         /*   CreateUser(context, "admin@mail.com", "123");
-            AddUserToRole(context, "admin@mail.com", "admin");*/
+            CreateUser(context, "admin@mail.com", "123");
+            AddUserToRole(context, "admin@mail.com", "admin");
         }
         private void CreateUser(ApplicationDbContext context,
             string email, string password)
@@ -33,11 +33,11 @@ namespace APSDevApp.Migrations
                 new UserStore<ApplicationUser>(context));
             userManager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit =true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequiredLength = 1,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
 
             var user = new ApplicationUser
