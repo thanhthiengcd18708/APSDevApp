@@ -34,13 +34,13 @@
                         <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "TrainerRoles", null, new { Style = "color:white" })</li>
                         <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "TrainerRoles", null, new { Style = "color:white" })</li>
 
-                        <li class="nav-item">@Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { Style = "color:white" })</li>
                     }
                     @if (User.IsInRole("trainee"))
                     {
                         <li class="nav-item">@Html.ActionLink("View Assigned Course", "ViewCourse", "TraineeRoles", null, new { Style = "color:white" })</li>
                         <li class="nav-item">@Html.ActionLink("Profile", "ViewProfile", "TraineeRoles", null, new { Style = "color:white" })</li>
-                        <li class="nav-item">@Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null, new { Style = "color:white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Change Password", "ResetPassword", "Account", null, new { Style = "color:white" })</li>
                     }
 
                     @if (User.IsInRole("admin"))

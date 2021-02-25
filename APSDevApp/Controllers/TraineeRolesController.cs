@@ -39,15 +39,12 @@ namespace APSDevApp.Controllers
         public ActionResult ViewCourse()
         {
             var userIdCurrent = User.Identity.GetUserId();
+
             var userInWeb = _context.Users.SingleOrDefault(u => u.Id == userIdCurrent);
             var traineeInWeb = _context.Trainees.SingleOrDefault(t => t.TraineeId == userInWeb.Id);
+
             var courseTrainee = _context.Courses.SingleOrDefault(c => c.Id == traineeInWeb.CourseId);
             var courses = _context.Courses.Include(c => c.Category).ToList();
-            var traineeInfor = new UserProfile()
-            {
-                UserInWeb = userInWeb,
-                TraineeInWeb = traineeInWeb
-            };
             return View(courseTrainee);
         }
 

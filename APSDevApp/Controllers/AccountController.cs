@@ -7,10 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System;
-using System.Globalization;
-using APSDevApp.ViewModels;
-using System.Data.Entity;
 using System.Web.Security;
 
 namespace APSDevApp.Controllers
@@ -57,44 +53,7 @@ namespace APSDevApp.Controllers
             }
         }
 
-        //Get/Account/ChangePasswordUser
-        [Authorize(Roles = "trainer,trainee")]
-        public ActionResult ChangePasswordUser()
-        {
-            var userIdCurrent = User.Identity.GetUserId();
-            ApplicationUser useInWeb = _context.Users.FirstOrDefault(c => c.Id == userIdCurrent);
-            var userPass = _context.Users.SingleOrDefault(m => m.Id == useInWeb.Id);
-            if (userPass == null) return HttpNotFound();
-            var changePassUser = new ResetPasswordViewModel()
-            {
-                User = useInWeb
-            };
-            return View(changePassUser);
-        }
 
-        // POST: /Account/ChangePasswordUser
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePasswordUser(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var userPass = await UserManager.FindByNameAsync(model.User.UserName);
-            if (userPass == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            await UserManager.RemovePasswordAsync(userPass.Id);
-            var result = await UserManager.AddPasswordAsync(userPass.Id, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            AddErrors(result);
-            return View();
-        }
 
         // GET: /Account/Login
         [AllowAnonymous]
@@ -311,17 +270,27 @@ namespace APSDevApp.Controllers
 
         //
         // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        [Authorize(Roles = "trainer,trainee")]
+
         public ActionResult ResetPassword(string id)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Id == id);
-            if (user == null) return HttpNotFound();
-            var resetUser = new ResetPasswordViewModel()
+            if (User.IsInRole("admin") || User.IsInRole("staff"))
             {
-                User = user
+                var user1 = _context.Users.SingleOrDefault(u => u.Id == id);
+                if (user1 == null) return HttpNotFound();
+                var resetUser1 = new ResetPasswordViewModel()
+                {
+                    User = user1
+                };
+                return View(resetUser1);
+            }
+            var currentUserId = User.Identity.GetUserId();
+            var user2 = _context.Users.SingleOrDefault(u => u.Id == currentUserId);
+            if (user2 == null) return HttpNotFound();
+            var resetUser2 = new ResetPasswordViewModel()
+            {
+                User = user2
             };
-            return View(resetUser);
+            return View(resetUser2);
         }
         // POST: /Account/ResetPassword
         [HttpPost]

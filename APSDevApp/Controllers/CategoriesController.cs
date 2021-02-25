@@ -40,9 +40,8 @@ namespace APSDevApp.Controllers
                 return View();
             }
             var checkCategory = _context.Categories.Where(t => t.Name == category.Name);
-            if (checkCategory.Count() > 0)
+            if (checkCategory.Any())
             {
-
                 return RedirectToAction("Index");
             }
             var newCategory = new Category()
@@ -90,7 +89,7 @@ namespace APSDevApp.Controllers
             }
             var course = _context.Courses.Where(t => t.CategoryId == id);
 
-            if (course.Count() > 0)
+            if (course.Any())
             {
                 return RedirectToAction("Index");
             }

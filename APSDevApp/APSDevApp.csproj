@@ -332,7 +332,6 @@
     <Content Include="Views\Trainers\Update.cshtml" />
     <Content Include="Views\Trainees\Details.cshtml" />
     <Content Include="Views\Trainees\Update.cshtml" />
-    <Content Include="Views\Account\ChangePasswordUser.cshtml" />
     <Content Include="Views\Staffs\Index.cshtml" />
     <Content Include="Views\Staffs\Update.cshtml" />
     <Content Include="Views\TraineeRoles\ViewProfile.cshtml" />

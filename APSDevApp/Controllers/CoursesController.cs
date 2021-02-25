@@ -45,7 +45,6 @@ namespace APSDevApp.Controllers
             {
                 return RedirectToAction("Create");
             }
-
             var checkCourse = _context.Courses.Where(t => t.Name == course.Name);
 
             if (checkCourse.Count() > 0)
@@ -74,8 +73,7 @@ namespace APSDevApp.Controllers
         public ActionResult Details(int id)
         {
 
-            var courseInDb = _context.Courses.SingleOrDefault(t => t.Id == id);
-            var courses = _context.Courses.Include(c => c.Category).ToList();
+            var courseInDb = _context.Courses.Include(c => c.Category).SingleOrDefault(t => t.Id == id);
             return View(courseInDb);
         }
         public ActionResult Update(int id)

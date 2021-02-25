@@ -10,7 +10,7 @@ using APSDevApp.Models;
 
 namespace APSDevApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -32,9 +32,9 @@ namespace APSDevApp.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -333,7 +333,7 @@ namespace APSDevApp.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +384,6 @@ namespace APSDevApp.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
