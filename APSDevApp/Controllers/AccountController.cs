@@ -84,13 +84,13 @@ namespace APSDevApp.Controllers
             var userPass = await UserManager.FindByNameAsync(model.User.UserName);
             if (userPass == null)
             {
-                return RedirectToAction("ViewProfile", "Account");
+                return RedirectToAction("Index", "Home");
             }
             await UserManager.RemovePasswordAsync(userPass.Id);
             var result = await UserManager.AddPasswordAsync(userPass.Id, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ViewProfile", "Account");
+                return RedirectToAction("Index", "Home");
             }
             AddErrors(result);
             return View();

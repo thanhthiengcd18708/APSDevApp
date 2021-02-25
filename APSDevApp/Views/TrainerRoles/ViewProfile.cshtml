@@ -1,9 +1,9 @@
 ﻿@model APSDevApp.ViewModels.UserProfile
 @{
-    ViewBag.Title = "ViewProfile";
+    ViewBag.Title = "View Profile";
 }
 
-<h2>ViewProfile</h2>
+<h2 style="text-align: center;color:orangered">View Trainer Profile </h2>
 @if (Model.TrainerInWeb != null || Model.UserInWeb != null)
 {
     <table class="table table-bordered">
@@ -33,7 +33,7 @@
                     <td>
                         @Html.ActionLink("Update Profile", "UpdateTrainerProfile", "TrainerRoles", null,
                               new { @class = "btn btn-primary", style = "margin: 10px" })
-                        @Html.ActionLink("Change Password", "ChangePasswordUser", "TrainerRoles", null,
+                        @Html.ActionLink("Change Password", "ChangePasswordUser", "Account", null,
                   new { @class = "btn btn-danger", style = "margin: 20px" })
                     </td>
                 }
