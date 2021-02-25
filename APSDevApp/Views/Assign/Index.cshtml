@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2 style="text-align:center ;text-transform: uppercase"> Course: @Model.Course.Name</h2>
+<h2 style="text-align:center ;text-transform: uppercase">  @Model.Course.Name</h2>
 
 @Html.ActionLink("Assign Trainer to Course", "CreateTrainerAssign", "Assign",
                                           new { id = Model.Course.Id },

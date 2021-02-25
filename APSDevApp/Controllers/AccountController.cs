@@ -15,7 +15,7 @@ using System.Web.Security;
 
 namespace APSDevApp.Controllers
 {
-    [Authorize(Roles = "admin,staff, trainer,trainee")]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationDbContext _context;
@@ -114,8 +114,6 @@ namespace APSDevApp.Controllers
             {
                 return View(model);
             }
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -208,10 +206,6 @@ namespace APSDevApp.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(_context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-
-
-
-
                 if (result.Succeeded)
                 {
                     userManager.AddToRole(user.Id, model.RoleName);
