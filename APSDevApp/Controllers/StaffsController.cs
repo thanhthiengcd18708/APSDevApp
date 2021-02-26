@@ -36,34 +36,6 @@ namespace APSDevApp.Controllers
             return View(staffs);
         }
         [Authorize(Roles = "admin")]
-        public ActionResult Update(string id)
-        {
-            var staffInDb = _context.Staffs.SingleOrDefault(t => t.StaffId == id);
-            if (staffInDb == null)
-            {
-                return HttpNotFound();
-            }
-            return View(staffInDb);
-        }
-        [HttpPost]
-        [Authorize(Roles = "admin")]
-        public ActionResult Update(Staff staff)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-            var staffInDb = _context.Staffs.SingleOrDefault(s => s.StaffId == staff.StaffId);
-            {
-                staffInDb.ApplicationUser.FullName = staff.ApplicationUser.FullName;
-                staffInDb.Location = staff.Location;
-                staffInDb.Age = staff.Age;
-                staffInDb.DayOfBirthday = staff.DayOfBirthday;
-            }
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        [Authorize(Roles = "admin")]
         public ActionResult Delete(string id)
         {
             var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
